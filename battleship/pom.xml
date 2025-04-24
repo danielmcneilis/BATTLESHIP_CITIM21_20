@@ -35,7 +35,7 @@
     <dependency>
       <groupId>etsisi</groupId>
       <artifactId>Battleship</artifactId>
-      <version>1.8</version>
+      <version>1.11</version>
     </dependency>
   </dependencies>
 
@@ -55,13 +55,4 @@
       </plugin>
     </plugins>
   </build>
-
-  <repositories>
-    <repository>
-      <id>etsisi</id>
-      <url>https://gitlab.etsisi.upm.es/bt0085/battleship_citim21_20.git/</url> <!-- Cambia esto por la URL correcta -->
-    </repository>
-  </repositories>
-
-
 </project>

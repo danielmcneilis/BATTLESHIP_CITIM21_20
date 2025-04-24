@@ -1,5 +1,7 @@
 package es.upm.etsisi.CITIM21_20;
 
+import es.upm.etsisi.fis.controller.ControladorPartida;
+
 /**
  * Hello world!
  *
