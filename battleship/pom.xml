@@ -38,6 +38,12 @@
       <version>1.11</version>
     </dependency>
   </dependencies>
+  <repositories>
+    <repository>
+      <id>local-repo</id>
+      <url>file://${project.basedir}\libs</url>
+    </repository>
+  </repositories>
 
   <build>
     <plugins>
