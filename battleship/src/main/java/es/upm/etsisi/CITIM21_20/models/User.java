@@ -5,6 +5,9 @@ import servidor.ExternalRRSS;
 import servidor.ObtencionDeRol;
 import servidor.UPMUsers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class User {
 
     @Getter
@@ -13,13 +16,14 @@ public class User {
     private String email;
     @Getter
     private UPMUsers role;
-    private Score score;
+    @Getter
+    private List<Score> scoreList;
 
 
-    public User(String username, String email, Score score) {
+    public User(String username, String email) {
         this.username = username;
         this.email = email;
-        this.score = score;
+        this.scoreList = new ArrayList<Score>();
         this.role = ObtencionDeRol.get_UPM_AccountRol(email);
     }
 

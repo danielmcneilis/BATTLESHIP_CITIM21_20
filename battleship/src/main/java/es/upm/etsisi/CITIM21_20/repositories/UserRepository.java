@@ -28,8 +28,7 @@ public class UserRepository {
     }
 
     public void createUser(String username, String email){
-        Score userScore = new Score();
-        User user = new User(username, email, userScore);
+        User user = new User(username, email);
         userList.add(user);
     }
 }
