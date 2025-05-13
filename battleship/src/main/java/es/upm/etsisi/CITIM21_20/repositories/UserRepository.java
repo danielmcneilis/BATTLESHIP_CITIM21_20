@@ -7,15 +7,23 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class UserRepository {
+public class UserRepository implements IUserRepository{
 
-    private List<User> userList;
+    private static UserRepository instance;
+    private static List<User> userList;
 
+    public static UserRepository getInstance() {
+        if(instance == null) {
+            instance = new UserRepository();
+        }
+        return instance;
+    }
 
-    public UserRepository() {
+    private UserRepository() {
         userList = new ArrayList<User>();
     }
 
+    @Override
     public User getUser(String username){
         Iterator<User> it = userList.iterator();
         while(it.hasNext()){
@@ -27,9 +35,16 @@ public class UserRepository {
         return null;
     }
 
-    public void createUser(String username, String email){
+    @Override
+    public User createUser(String username, String email){
         Score userScore = new Score();
         User user = new User(username, email, userScore);
         userList.add(user);
+        return user;
+    }
+
+    @Override
+    public boolean deleteUser(String username) {
+        return false;
     }
 }

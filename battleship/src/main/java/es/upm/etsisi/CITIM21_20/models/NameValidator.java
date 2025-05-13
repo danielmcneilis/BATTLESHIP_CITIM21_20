@@ -4,7 +4,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 
-public class NameValidator {
+public abstract class NameValidator {
 
     private static final String fileName = "black_list.txt";
 
