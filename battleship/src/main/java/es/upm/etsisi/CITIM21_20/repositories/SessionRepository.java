@@ -14,13 +14,13 @@ public class SessionRepository implements ISessonRepository{
 
     public static SessionRepository getInstance(){
         if(instance == null){
-            instance = new SessionRepository();
+            instance = new SessionRepository(new ArrayList<Session>());
         }
         return instance;
     }
 
-    private SessionRepository(){
-        sessions = new ArrayList<Session>();
+    private SessionRepository(ArrayList<Session> sessions){
+        this.sessions = sessions;
     }
 
     @Override

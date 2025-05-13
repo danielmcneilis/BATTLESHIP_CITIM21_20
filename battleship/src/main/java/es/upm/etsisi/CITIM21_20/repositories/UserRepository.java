@@ -10,17 +10,17 @@ import java.util.List;
 public class UserRepository implements IUserRepository{
 
     private static UserRepository instance;
-    private static List<User> userList;
+    private List<User> userList;
 
     public static UserRepository getInstance() {
         if(instance == null) {
-            instance = new UserRepository();
+            instance = new UserRepository(new ArrayList<User>());
         }
         return instance;
     }
 
-    private UserRepository() {
-        userList = new ArrayList<User>();
+    private UserRepository(ArrayList<User> userList) {
+        this.userList = userList;
     }
 
     @Override
