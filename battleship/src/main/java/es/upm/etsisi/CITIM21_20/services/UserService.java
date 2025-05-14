@@ -1,6 +1,5 @@
 package es.upm.etsisi.CITIM21_20.services;
 
-import es.upm.etsisi.CITIM21_20.models.IUser;
 import es.upm.etsisi.CITIM21_20.models.NameValidator;
 import es.upm.etsisi.CITIM21_20.models.Score;
 import es.upm.etsisi.CITIM21_20.models.User;
@@ -15,10 +14,11 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import static servidor.ObtencionDeRol.get_UPM_AccountRol;
+
 public class UserService {
 
     private UserRepository userList;
-
 
     public UserService(UserRepository userList) {
         this.userList = userList;
@@ -54,16 +54,29 @@ public class UserService {
 
     }
 
+
+    public List<Score> getScore (User usuario){
+        UPMUsers rol =  get_UPM_AccountRol(usuario.getEmail());
+        List<Score> listapuntuaciones = new ArrayList<>();
+        if(rol == UPMUsers.ALUMNO){
+            listapuntuaciones = userScore(usuario.getUsername());
+        } else if (rol == UPMUsers.PDI) { // no tendria que ser esto admin????
+            listapuntuaciones = adminScore(usuario.getUsername());
+        }
+
+        return listapuntuaciones;
+    }
+
     // PDI-----> profesores
     // PAS ----->
-    public void getScoreAdmin(UPMUsers rol){ // la logica de buscar los jugadores y en la vista mostrar por pantalla
-        if(rol == UPMUsers.ALUMNO){ // se que son alumnos
-
-        }
+    public List<Score> adminScore(String nombreusuario){
+        // el admin puede ver todas las puntuaciones
+        List<Score> listapuntuaciones = new ArrayList<>();
+        Iterator<User> itusuarios = // esto lo ibamos a cambiar a un hashmap
 
     }
 
-    public List<Score> UserScore(String nombreusuario){ // ver las 10 mejores partidas suyas
+    private List<Score> userScore(String nombreusuario){ // ver las 10 mejores partidas suyas
         User usuario = userList.getUser(nombreusuario);
         List<Score> top10 = new ArrayList<>();
         List<Score> nueva = CloneList(usuario.getScoreList());
