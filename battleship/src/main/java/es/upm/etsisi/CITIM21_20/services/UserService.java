@@ -29,7 +29,7 @@ public class UserService {
             throw new RuntimeException("INVALID USERNAME");
         }
 
-        if(!userList.getUserByUsername(username)){
+        if(userList.getUserByUsername(username)){
             throw new  RuntimeException("INVALID USERNAME");
         }
 
@@ -77,7 +77,7 @@ public class UserService {
             throw new RuntimeException("INVALID USERNAME");
         }
 
-        if(!userList.getUserByUsername(newUserName)){
+        if(userList.getUserByUsername(newUserName)){
             throw new  RuntimeException("INVALID USERNAME");
         }
 
