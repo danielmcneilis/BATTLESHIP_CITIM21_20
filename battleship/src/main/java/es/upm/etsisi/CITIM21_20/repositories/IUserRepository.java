@@ -6,8 +6,8 @@ import java.io.IOException;
 
 public interface IUserRepository {
 
-    public User getUser(String id);
-    public boolean getUserByUsername (String username);
-    public User createUser(String username, String id) throws IOException;
-    public boolean deleteUser(String id);
+    User getUser(String id);
+    boolean getUserByUsername (String username);
+    User createUser(String username, String id) throws IOException;
+    boolean deleteUser(String id);
 }
