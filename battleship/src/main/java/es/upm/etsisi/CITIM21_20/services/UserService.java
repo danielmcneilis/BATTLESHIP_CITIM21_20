@@ -69,8 +69,8 @@ public class UserService {
 
     // PDI-----> profesores
     // PAS ----->
-    public List<Score> adminScore(String nombreusuario){
-        // el admin puede ver todas las puntuaciones
+    private List<Score> adminScore(String nombreusuario){
+        // el admin puede ver todas las puntuaciones, pero si puede ver todas, para que le paso un nombre como parametro
         List<Score> listapuntuaciones = new ArrayList<>();
         Iterator<User> itusuarios = // esto lo ibamos a cambiar a un hashmap
 
