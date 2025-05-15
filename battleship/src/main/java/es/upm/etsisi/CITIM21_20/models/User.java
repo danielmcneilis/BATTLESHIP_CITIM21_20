@@ -37,9 +37,7 @@ public class User {
         }
 
         reader.close();
-        // No puede estar el nombre en el fichero black_list.txt
 
-        // Tiene que tener entre 3 y 10 caracteres
         if(this.username != null)
             return this.username.length() >= 3 && this.username.length() <= 10;
 
