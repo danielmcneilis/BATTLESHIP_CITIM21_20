@@ -2,9 +2,15 @@ package es.upm.etsisi.CITIM21_20.repositories;
 
 import es.upm.etsisi.CITIM21_20.models.User;
 
+import java.io.IOException;
+
 public interface IUserRepository {
 
-    public User getUser(String id);
-    public User createUser(String username, String id);
-    public boolean deleteUser(String id);
+    User getUser(String id);
+
+    boolean getUserByUsername(String username);
+
+    User createUser(String username, String id) throws IOException;
+
+    boolean deleteUser(String id);
 }

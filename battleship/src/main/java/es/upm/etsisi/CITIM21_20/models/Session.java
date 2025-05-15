@@ -4,9 +4,7 @@ import lombok.Getter;
 import servidor.ObtencionDeRol;
 import servidor.UPMUsers;
 
-import javax.management.relation.Role;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 public class Session {
 
@@ -25,13 +23,13 @@ public class Session {
         this.lastLogin = LocalDateTime.now();
     }
 
-    public void login(){
+    public void login() {
         this.active = true;
         this.lastLogin = LocalDateTime.now();
     }
 
-    public boolean logout(){
-        if(!this.active){
+    public boolean logout() {
+        if (!this.active) {
             return false;
         }
         this.active = false;
