@@ -3,10 +3,8 @@ package es.upm.etsisi.CITIM21_20.repositories;
 import es.upm.etsisi.CITIM21_20.models.Score;
 import es.upm.etsisi.CITIM21_20.models.User;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
+import java.io.IOException;
+import java.util.*;
 
 public class UserRepository implements IUserRepository{
 
@@ -30,7 +28,18 @@ public class UserRepository implements IUserRepository{
     }
 
     @Override
-    public User createUser(String username, String id){
+    public boolean getUserByUsername (String username){
+        for (Map.Entry<String, User> entry : userList.entrySet()){
+            User user = entry.getValue();
+            if(user.getUsername().equals(username)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public User createUser(String username, String id) throws IOException {
         Score userScore = new Score();
         User user = new User(username, id, userScore);
         userList.put(id, user);

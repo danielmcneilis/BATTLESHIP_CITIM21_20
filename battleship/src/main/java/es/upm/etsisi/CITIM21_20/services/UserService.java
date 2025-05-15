@@ -1,13 +1,10 @@
 package es.upm.etsisi.CITIM21_20.services;
 
-import es.upm.etsisi.CITIM21_20.models.NameValidator;
 import es.upm.etsisi.CITIM21_20.models.Session;
 import es.upm.etsisi.CITIM21_20.models.User;
 import es.upm.etsisi.CITIM21_20.repositories.ISessonRepository;
 import es.upm.etsisi.CITIM21_20.repositories.IUserRepository;
-import servidor.Autenticacion;
 import servidor.ExternalLDAP;
-import utilidades.Cifrado;
 
 import java.io.IOException;
 
@@ -30,6 +27,10 @@ public class UserService {
 
         if (userList.getUser(id) != null) {
             throw new RuntimeException("INVALID USERNAME");
+        }
+
+        if(!userList.getUserByUsername(username)){
+            throw new  RuntimeException("INVALID USERNAME");
         }
 
         if (username.length() < 3 || username.length() > 10) {
@@ -75,6 +76,11 @@ public class UserService {
         if (user.isValidUserName()){
             throw new RuntimeException("INVALID USERNAME");
         }
+
+        if(!userList.getUserByUsername(newUserName)){
+            throw new  RuntimeException("INVALID USERNAME");
+        }
+
         user.setUsername(newUserName);
         return true;
     }
