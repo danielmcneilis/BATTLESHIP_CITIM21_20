@@ -11,6 +11,7 @@ import utilidades.Cifrado;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
@@ -18,7 +19,7 @@ import static servidor.ObtencionDeRol.get_UPM_AccountRol;
 
 public class UserService {
 
-    private UserRepository userList;
+    private HashMap<String, User> userList;
 
     public UserService(UserRepository userList) {
         this.userList = userList;
@@ -72,12 +73,14 @@ public class UserService {
     private List<Score> adminScore(String nombreusuario){
         // el admin puede ver todas las puntuaciones, pero si puede ver todas, para que le paso un nombre como parametro
         List<Score> listapuntuaciones = new ArrayList<>();
-        Iterator<User> itusuarios = // esto lo ibamos a cambiar a un hashmap
-
+        for (User savedUsers : userList.values()){ // me recorre el mapa entero con las claves
+            listapuntuaciones.addAll(savedUsers.getScoreList()); // me guarda toda su lista de puntuaciones
+        }
+        return listapuntuaciones;
     }
 
     private List<Score> userScore(String nombreusuario){ // ver las 10 mejores partidas suyas
-        User usuario = userList.getUser(nombreusuario);
+        User usuario = userList.get(nombreusuario); // No se si usamos el nombre de usuario o su id que devulve el LDAP
         List<Score> top10 = new ArrayList<>();
         List<Score> nueva = CloneList(usuario.getScoreList());
         if(usuario != null) {
