@@ -25,6 +25,12 @@ public class SessionRepository implements ISessonRepository{
 
     @Override
     public Session getSession(String id) {
+        for(Session session : sessions){
+            if(session.getUser().getId().equals(id)){
+                return session;
+            }
+        }
+
         return null;
     }
 
