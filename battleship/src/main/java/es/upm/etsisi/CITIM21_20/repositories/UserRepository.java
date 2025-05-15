@@ -4,42 +4,36 @@ import es.upm.etsisi.CITIM21_20.models.Score;
 import es.upm.etsisi.CITIM21_20.models.User;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
 public class UserRepository implements IUserRepository{
 
     private static UserRepository instance;
-    private List<User> userList;
+    private HashMap<String, User> userList;
 
     public static UserRepository getInstance() {
         if(instance == null) {
-            instance = new UserRepository(new ArrayList<User>());
+            instance = new UserRepository(new HashMap<>());
         }
         return instance;
     }
 
-    private UserRepository(ArrayList<User> userList) {
+    private UserRepository(HashMap<String, User> userList) {
         this.userList = userList;
     }
 
     @Override
-    public User getUser(String username){
-        Iterator<User> it = userList.iterator();
-        while(it.hasNext()){
-            User user = it.next();
-            if(user.getUsername().equals(username)){
-                return user;
-            }
-        }
-        return null;
+    public User getUser(String id){
+        return userList.get(id);
     }
 
     @Override
-    public User createUser(String username, String email){
+    public User createUser(String username, String id){
         Score userScore = new Score();
-        User user = new User(username, email, userScore);
-        userList.add(user);
+        User user = new User(username, id, userScore);
+        userList.put(id, user);
         return user;
     }
 

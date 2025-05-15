@@ -18,9 +18,9 @@ public class Session {
     private LocalDateTime lastLogin;
 
 
-    public Session(User user) {
+    public Session(User user, String email) {
         this.user = user;
-        this.role = ObtencionDeRol.get_UPM_AccountRol(user.getEmail());
+        this.role = ObtencionDeRol.get_UPM_AccountRol(email);
         this.active = true;
         this.lastLogin = LocalDateTime.now();
     }
@@ -30,8 +30,12 @@ public class Session {
         this.lastLogin = LocalDateTime.now();
     }
 
-    public void logout(){
+    public boolean logout(){
+        if(!this.active){
+            return false;
+        }
         this.active = false;
         this.lastLogin = LocalDateTime.now();
+        return true;
     }
 }

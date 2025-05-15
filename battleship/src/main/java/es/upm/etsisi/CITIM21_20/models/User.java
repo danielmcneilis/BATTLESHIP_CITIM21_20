@@ -9,14 +9,21 @@ public class User {
     @Setter
     private String username;
     @Getter
-    private String email;
+    private String id;
     private Score score;
 
 
-    public User(String username, String email, Score score) {
+    public User(String username, String id, Score score) {
+        if (!this.isValidUserName()){
+            throw new RuntimeException("INVALID USERNAME");
+        }
         this.username = username;
-        this.email = email;
+        this.id = id;
         this.score = score;
+    }
+
+    public boolean isValidUserName(){
+        return true;
     }
 
 }

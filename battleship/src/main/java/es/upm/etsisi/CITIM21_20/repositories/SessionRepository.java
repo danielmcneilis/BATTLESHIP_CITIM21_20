@@ -24,16 +24,16 @@ public class SessionRepository implements ISessonRepository{
     }
 
     @Override
-    public Session getSession(String username) {
+    public Session getSession(String id) {
         return null;
     }
 
     @Override
-    public void createSession(User user) {
+    public void createSession(User user, String email) {
     }
 
     @Override
-    public boolean deleteSession(String username) {
+    public boolean deleteSession(String id) {
         return false;
     }
 }
