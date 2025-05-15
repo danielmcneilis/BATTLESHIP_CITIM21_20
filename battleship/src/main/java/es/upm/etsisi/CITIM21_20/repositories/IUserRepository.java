@@ -7,7 +7,10 @@ import java.io.IOException;
 public interface IUserRepository {
 
     User getUser(String id);
-    boolean getUserByUsername (String username);
+
+    boolean getUserByUsername(String username);
+
     User createUser(String username, String id) throws IOException;
+
     boolean deleteUser(String id);
 }

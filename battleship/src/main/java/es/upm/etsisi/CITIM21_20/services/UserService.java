@@ -29,8 +29,8 @@ public class UserService {
             throw new RuntimeException("INVALID USERNAME");
         }
 
-        if(userList.getUserByUsername(username)){
-            throw new  RuntimeException("INVALID USERNAME");
+        if (userList.getUserByUsername(username)) {
+            throw new RuntimeException("INVALID USERNAME");
         }
 
         if (username.length() < 3 || username.length() > 10) {
@@ -58,14 +58,14 @@ public class UserService {
         return true;
     }
 
-    public boolean logout(User user){
+    public boolean logout(User user) {
         Session userSession = this.sessionList.getSession(user.getId());
         userSession.logout();
         //Ir a la pantalla principal
         return true;
     }
 
-    public boolean DeleteAccount(User user){
+    public boolean DeleteAccount(User user) {
         this.userList.deleteUser(user.getId());
         this.sessionList.deleteSession(user.getId());
         //Ir a la pantalla principal
@@ -73,12 +73,12 @@ public class UserService {
     }
 
     public boolean changeUserName(User user, String newUserName) throws IOException {
-        if (user.isValidUserName()){
+        if (user.isValidUserName()) {
             throw new RuntimeException("INVALID USERNAME");
         }
 
-        if(userList.getUserByUsername(newUserName)){
-            throw new  RuntimeException("INVALID USERNAME");
+        if (userList.getUserByUsername(newUserName)) {
+            throw new RuntimeException("INVALID USERNAME");
         }
 
         user.setUsername(newUserName);

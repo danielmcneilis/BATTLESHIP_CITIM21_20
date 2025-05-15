@@ -6,31 +6,30 @@ import es.upm.etsisi.CITIM21_20.models.User;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SessionRepository implements ISessonRepository{
+public class SessionRepository implements ISessonRepository {
 
     private static SessionRepository instance;
     private List<Session> sessions;
 
 
-    public static SessionRepository getInstance(){
-        if(instance == null){
+    public static SessionRepository getInstance() {
+        if (instance == null) {
             instance = new SessionRepository(new ArrayList<Session>());
         }
         return instance;
     }
 
-    private SessionRepository(ArrayList<Session> sessions){
+    private SessionRepository(ArrayList<Session> sessions) {
         this.sessions = sessions;
     }
 
     @Override
     public Session getSession(String id) {
-        for(Session session : sessions){
-            if(session.getUser().getId().equals(id)){
+        for (Session session : sessions) {
+            if (session.getUser().getId().equals(id)) {
                 return session;
             }
         }
-
         return null;
     }
 
@@ -42,8 +41,8 @@ public class SessionRepository implements ISessonRepository{
 
     @Override
     public boolean deleteSession(String id) {
-        for(Session session : sessions){
-            if(session.getUser().getId().equals(id)){
+        for (Session session : sessions) {
+            if (session.getUser().getId().equals(id)) {
                 sessions.remove(session);
                 return true;
             }

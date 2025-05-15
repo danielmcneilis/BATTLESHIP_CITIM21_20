@@ -17,7 +17,7 @@ public class User {
 
 
     public User(String username, String id, Score score) throws IOException {
-        if (!this.isValidUserName()){
+        if (!this.isValidUserName()) {
             throw new RuntimeException("INVALID USERNAME");
         }
         this.username = username;
@@ -29,8 +29,8 @@ public class User {
         BufferedReader reader = new BufferedReader(new FileReader("black_list.txt"));
         String line;
 
-        while((line = reader.readLine()) != null){
-            if(line.trim().equals(this.username)){
+        while ((line = reader.readLine()) != null) {
+            if (line.trim().equals(this.username)) {
                 reader.close();
                 return false;
             }
@@ -38,7 +38,7 @@ public class User {
 
         reader.close();
 
-        if(this.username != null)
+        if (this.username != null)
             return this.username.length() >= 3 && this.username.length() <= 10;
 
         return true;
