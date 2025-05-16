@@ -13,7 +13,7 @@ public class UserRepository implements IUserRepository {
     private HashMap<String, User> userList;
 
     public static UserRepository getInstance() {
-        if (instance == null) {
+        if(instance == null) {
             instance = new UserRepository(new HashMap<>());
         }
         return instance;
@@ -24,8 +24,15 @@ public class UserRepository implements IUserRepository {
     }
 
     @Override
-    public User getUser(String id) {
+    public User getUser(String id){
         return userList.get(id);
+    }
+
+    @Override
+    public User createUser(String username, String id){
+        User user = new User(username, id);
+        userList.put(id, user);
+        return user;
     }
 
     @Override
@@ -37,14 +44,6 @@ public class UserRepository implements IUserRepository {
             }
         }
         return false;
-    }
-
-    @Override
-    public User createUser(String username, String id) throws IOException {
-        Score userScore = new Score();
-        User user = new User(username, id, userScore);
-        userList.put(id, user);
-        return user;
     }
 
     @Override
