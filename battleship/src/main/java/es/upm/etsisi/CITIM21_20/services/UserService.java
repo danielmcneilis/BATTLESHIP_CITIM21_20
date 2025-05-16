@@ -92,7 +92,7 @@ public class UserService {
     }
 
     public boolean changeUserName(User user, String newUserName) throws IOException {
-        if (user.isValidUserName()) {
+        if (!user.isValidUserName()) {
             throw new RuntimeException("INVALID USERNAME");
         }
 
