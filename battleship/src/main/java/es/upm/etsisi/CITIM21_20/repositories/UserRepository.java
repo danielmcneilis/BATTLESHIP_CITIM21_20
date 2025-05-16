@@ -8,7 +8,52 @@ import java.util.Iterator;
 import java.util.List;
 
 public class UserRepository {
+    private static UserRepository instance;
+    private List<User> userList;
 
+    public static UserRepository getInstance() {
+        if(instance == null) {
+            instance = new UserRepository(new ArrayList<User>());
+        }
+        return instance;
+    }
+
+    private UserRepository(ArrayList<User> userList) {
+        this.userList = userList;
+    }
+
+    @Override
+    public User getUser(String username){
+        Iterator<User> it = userList.iterator();
+        while(it.hasNext()){
+            User user = it.next();
+            if(user.getUsername().equals(username)){
+                return user;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public User createUser(String username, String email){
+        Score userScore = new Score();
+        User user = new User(username, email, userScore);
+        userList.add(user);
+        return user;
+    }
+
+    @Override
+    public boolean deleteUser(String username) {
+        return false;
+    }
+
+
+
+
+
+}
+
+/*
     private List<User> userList;
 
 
@@ -31,4 +76,4 @@ public class UserRepository {
         User user = new User(username, email);
         userList.add(user);
     }
-}
+*/

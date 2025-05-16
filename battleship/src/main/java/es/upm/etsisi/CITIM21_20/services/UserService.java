@@ -73,7 +73,7 @@ public class UserService {
     private List<Score> adminScore(String nombreusuario){
         // el admin puede ver todas las puntuaciones, pero si puede ver todas, para que le paso un nombre como parametro
         List<Score> listapuntuaciones = new ArrayList<>();
-        for (User savedUsers : userList.values()){ // me recorre el mapa entero con las claves
+        for (User savedUsers : userList.values()){ // me recorre el mapa entero con los valores
             listapuntuaciones.addAll(savedUsers.getScoreList()); // me guarda toda su lista de puntuaciones
         }
         return listapuntuaciones;
