@@ -1,10 +1,14 @@
 package es.upm.etsisi.CITIM21_20.models;
 
 import es.upm.etsisi.fis.model.IPuntuacion;
+import es.upm.etsisi.fis.model.Partida;
+import lombok.Getter;
 
 public class Score implements IPuntuacion {
 
-    private double score;
+    private long score;
+    @Getter
+    private long partidaasociada;
 
 
     public Score() {
@@ -13,21 +17,25 @@ public class Score implements IPuntuacion {
 
     @Override
     public long getPuntos() {
-        return 0;
+        return this.score;
     }
 
     @Override
-    public IPuntuacion clonePuntuacion() {
-        return null;
+    public IPuntuacion clonePuntuacion() { // no estoy seguro si seria algo asi
+        IPuntuacion clone = new Score(); //  he usado esto porque no queria crear un nuevo contructor
+        clone.setPuntuacion(this.score);
+        clone.setPartidaId(this.partidaasociada);
+        return clone;
     }
 
     @Override
     public void setPuntuacion(long l) {
-
+        this.score = l;
     }
 
     @Override
-    public void setPartidaId(Long aLong) {
-
+    public void setPartidaId(Long aLong) { // asociar la partida con la puntuacion
+        this.partidaasociada = aLong;
     }
+
 }
