@@ -9,6 +9,7 @@ import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class User implements IJugador {
 
@@ -18,6 +19,7 @@ public class User implements IJugador {
     @Getter
     private String id;
     private List<IPuntuacion> score;
+    private List<IMovimiento> attackList;
 
 
     public User(String username, String id) {
@@ -27,6 +29,7 @@ public class User implements IJugador {
         this.username = username;
         this.id = id;
         this.score = new ArrayList<IPuntuacion>();
+        this.attackList = new ArrayList<IMovimiento>();
     }
 
     public boolean isValidUserName(){
@@ -40,12 +43,17 @@ public class User implements IJugador {
 
     @Override
     public int[] realizaTurno(char[][] chars) {
-        return new int[];
+        System.out.println("INTRODUCE UNA POSICION (FILA , COLUMNA):");
+        Scanner scanner = new Scanner(System.in);
+        int fila = scanner.nextInt();
+        int columna = scanner.nextInt();
+        int[] posicion = {fila, columna};
+        return posicion;
     }
 
     @Override
     public void addMovimiento(IMovimiento iMovimiento) {
-
+        this.attackList.add(iMovimiento);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package es.upm.etsisi.CITIM21_20.models;
 
 import es.upm.etsisi.fis.model.IMovimiento;
+import lombok.Getter;
 
 public class Movement implements IMovimiento {
 
