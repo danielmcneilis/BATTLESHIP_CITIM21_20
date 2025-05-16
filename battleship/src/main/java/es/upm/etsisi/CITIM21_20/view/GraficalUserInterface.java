@@ -9,7 +9,7 @@ public class GraficalUserInterface {
 
     public void showLogin(){
         String cipheredUserName = ExternalRRSS.LoginRRSS();
-        userService.login(cipheredUserName, //contraseñaCifrada);
+        //userService.login(cipheredUserName, //contraseñaCifrada);
 
     }
 }

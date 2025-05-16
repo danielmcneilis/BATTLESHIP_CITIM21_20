@@ -1,0 +1,29 @@
+package es.upm.etsisi.CITIM21_20.services;
+
+import es.upm.etsisi.CITIM21_20.models.Movement;
+import es.upm.etsisi.CITIM21_20.models.Score;
+import es.upm.etsisi.fis.controller.ControladorPartida;
+import es.upm.etsisi.fis.model.IJugador;
+import es.upm.etsisi.fis.model.IMovimiento;
+import es.upm.etsisi.fis.model.IPuntuacion;
+
+import java.util.Scanner;
+
+public class GameService {
+
+    private Scanner scanner;
+    private ControladorPartida controladorPartida;
+
+    public GameService(Scanner scanner) {
+        this.scanner = scanner;
+        this.controladorPartida = ControladorPartida.getInstance(scanner);
+    }
+
+    public void startGame(IJugador usuariologued){
+        IPuntuacion puntuacion = new Score();
+        IMovimiento movimiento = new Movement();
+
+        controladorPartida.crearPartida(usuariologued, puntuacion, movimiento);
+    }
+
+}

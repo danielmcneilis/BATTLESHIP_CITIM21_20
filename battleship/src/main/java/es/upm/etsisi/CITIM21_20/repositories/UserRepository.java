@@ -31,8 +31,7 @@ public class UserRepository implements IUserRepository{
 
     @Override
     public User createUser(String username, String id){
-        Score userScore = new Score();
-        User user = new User(username, id, userScore);
+        User user = new User(username, id);
         userList.put(id, user);
         return user;
     }
