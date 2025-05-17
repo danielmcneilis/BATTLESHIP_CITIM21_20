@@ -26,7 +26,7 @@ public class User implements IJugador {
     private List<IMovimiento> attackList;
 
 
-    public User(String username, String id) {
+    public User(String username, String id) throws IOException {
         if (!this.isValidUserName()){
             throw new RuntimeException("INVALID USERNAME");
         }
@@ -37,7 +37,7 @@ public class User implements IJugador {
     }
 
     public boolean isValidUserName() throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader("black_list.txt"));
+        BufferedReader reader = new BufferedReader(new FileReader("src/main/java/es/upm/etsisi/CITIM21_20/black_list.txt"));
         String line;
 
         while ((line = reader.readLine()) != null) {

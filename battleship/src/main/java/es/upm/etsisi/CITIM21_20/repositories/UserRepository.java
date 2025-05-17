@@ -29,21 +29,21 @@ public class UserRepository implements IUserRepository {
     }
 
     @Override
-    public User createUser(String username, String id){
+    public User createUser(String username, String id) throws IOException {
         User user = new User(username, id);
         userList.put(id, user);
         return user;
     }
 
     @Override
-    public boolean getUserByUsername(String username) {
+    public User getUserByUsername(String username) {
         for (Map.Entry<String, User> entry : userList.entrySet()) {
             User user = entry.getValue();
             if (user.getUsername().equals(username)) {
-                return true;
+                return user;
             }
         }
-        return false;
+        return null;
     }
 
     @Override
