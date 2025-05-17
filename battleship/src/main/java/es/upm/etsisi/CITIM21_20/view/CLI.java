@@ -74,7 +74,10 @@ public class CLI {
                 menuLogin();
                 break;
             case 5:
-                // TODO Darse de baja
+                userService.logout(userLoggeado);
+                userService.deleteAccount(userLoggeado);
+                System.out.println("Usuario borrado");
+                menuLogin();
                 break;
             default:
                 System.out.println("ERROR");

@@ -4,7 +4,6 @@ import es.upm.etsisi.CITIM21_20.models.Session;
 import es.upm.etsisi.CITIM21_20.models.User;
 import es.upm.etsisi.CITIM21_20.repositories.ISessonRepository;
 import es.upm.etsisi.CITIM21_20.repositories.IUserRepository;
-import es.upm.etsisi.fis.model.IJugador;
 import servidor.ExternalLDAP;
 
 import java.io.IOException;
@@ -73,10 +72,9 @@ public class UserService {
         userSession.logout();
     }
 
-    public boolean DeleteAccount(User user) {
+    public void deleteAccount(User user) {
         this.userList.deleteUser(user.getId());
         this.sessionList.deleteSession(user.getId());
-        return true;
     }
 
 //    public boolean changeUserName(User user, String newUserName) throws IOException {

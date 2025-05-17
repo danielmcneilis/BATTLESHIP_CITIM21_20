@@ -51,7 +51,7 @@ public class UserRepository implements IUserRepository {
     }
 
     @Override
-    public boolean deleteUser(String username) {
-        return false;
+    public void deleteUser(String id) {
+        this.userList.remove(id);
     }
 }
