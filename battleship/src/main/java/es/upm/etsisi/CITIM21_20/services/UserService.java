@@ -23,35 +23,28 @@ public class UserService {
         String id = ExternalLDAP.LoginLDAP(); // unico para cada usuario
         Scanner scanner = new Scanner(System.in);
         String username;
-        System.out.println("Introduce un nombre de usuario");
-        do{
-            username = scanner.nextLine();
-        }while ();
-        // crearlo
-
-
-
-        Scanner scanner = new Scanner(System.in);
-        String email = scanner.nextLine();
+        User createdUser;
 
         if (id == null) {
             throw new RuntimeException("ERROR LDAP");
         }
 
         if (userList.getUser(id) != null) {
-            throw new RuntimeException("INVALID USERNAME");
+            throw new RuntimeException("INVALID USER");
         }
+
+        do {
+            System.out.println("Introduce un nombre de usuario");
+            username = scanner.nextLine();
+            createdUser = userList.createUser(username, id);
+        } while (createdUser == null);
 
         if (userList.getUserByUsername(username) != null) {
             throw new RuntimeException("REGISTRATION NOT POSIBLE");
         }
 
-        if (username.length() < 3 || username.length() > 10) {
-            throw new RuntimeException("INVALID USERNAME");
-        }
-
-        User user = userList.createUser(username, id);
-        sessionList.createSession(user, email);
+        sessionList.createSession(createdUser, id);
+        System.out.println("Usuario registrado correctamente");
     }
 
     public void login() {

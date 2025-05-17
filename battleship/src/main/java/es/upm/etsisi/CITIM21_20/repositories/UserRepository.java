@@ -31,8 +31,12 @@ public class UserRepository implements IUserRepository {
     @Override
     public User createUser(String username, String id) throws IOException {
         User user = new User(username, id);
-        userList.put(id, user);
-        return user;
+        if(user.isValidUserName())
+        {
+            userList.put(id, user);
+            return user;
+        }
+        return null;
     }
 
     @Override
