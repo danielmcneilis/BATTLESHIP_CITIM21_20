@@ -1,6 +1,8 @@
 package es.upm.etsisi.CITIM21_20.view;
+import es.upm.etsisi.CITIM21_20.models.User;
 import es.upm.etsisi.CITIM21_20.services.GameService;
 import es.upm.etsisi.CITIM21_20.services.UserService;
+import es.upm.etsisi.fis.model.IJugador;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -25,6 +27,7 @@ public class CLI {
 
     public void menuLogin() throws IOException {
         int option;
+        User userLoggeado = null;
         do {
             mostrarMenuLogin();
             Scanner scanner = new Scanner(System.in);
@@ -33,16 +36,60 @@ public class CLI {
 
         switch (option){
             case 1:
-                this.userService.login();
+                userLoggeado = this.userService.login();
+                menuPrincipal(userLoggeado);
                 break;
             case 2:
-                userService.userRegister();
+                userLoggeado = this.userService.userRegister();
+                // TODO: se puede pasar como parámetro el usuario o aumenta el acoplamiento?
+                menuPrincipal(userLoggeado);
                 break;
             case 3:
                 break;
             default:
                 System.out.println("ERROR");
         }
+    }
+
+    private void menuPrincipal(User userLoggeado) throws IOException {
+        int option;
+        do {
+            mostrarMenuPrincipal();
+            Scanner scanner = new Scanner(System.in);
+            option = scanner.nextInt();
+        } while(option < 1 || option > 5 );
+
+        switch (option){
+            case 1:
+                // TODO Comenzar partida
+                this.gameService.startGame(userLoggeado);
+                break;
+            case 2:
+                // TODO Ver Puntuacion
+                break;
+            case 3:
+                // TODO Cambiar Nombre Usuario
+                break;
+            case 4:
+                userService.logout(userLoggeado);
+                menuLogin();
+                break;
+            case 5:
+                // TODO Darse de baja
+                break;
+            default:
+                System.out.println("ERROR");
+        }
+    }
+
+    private void mostrarMenuPrincipal(){
+        System.out.println("--------------BIENVENIDO--------------");
+        System.out.println("1-. Comenzar Partida.");
+        System.out.println("2-. Ver Puntuacion.");
+        System.out.println("3-. Cambiar Nombre Usuario.");
+        System.out.println("4-. Cerrar Sesion.");
+        System.out.println("5-. Darse de Baja");
+
     }
 
     private void mostrarMenuLogin(){

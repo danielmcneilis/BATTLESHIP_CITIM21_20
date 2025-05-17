@@ -4,6 +4,7 @@ import es.upm.etsisi.CITIM21_20.models.Session;
 import es.upm.etsisi.CITIM21_20.models.User;
 import es.upm.etsisi.CITIM21_20.repositories.ISessonRepository;
 import es.upm.etsisi.CITIM21_20.repositories.IUserRepository;
+import es.upm.etsisi.fis.model.IJugador;
 import servidor.ExternalLDAP;
 
 import java.io.IOException;
@@ -20,7 +21,7 @@ public class UserService {
         this.sessionList = sessionList;
     }
 
-    public void userRegister() throws IOException {
+    public User userRegister() throws IOException {
         String id = ExternalLDAP.LoginLDAP(); // unico para cada usuario
         Scanner scanner = new Scanner(System.in);
         String username;
@@ -43,14 +44,11 @@ public class UserService {
             createdUser = userList.createUser(username, id);
         } while (createdUser == null);
 
-
-
         sessionList.createSession(createdUser, id);
-        System.out.println("Usuario registrado correctamente");
+        return createdUser;
     }
 
-    public void login() {
-        System.out.println("Llamando LDAP");
+    public User login() {
         String id = ExternalLDAP.LoginLDAP();
 
         if (id == null) {
@@ -64,7 +62,7 @@ public class UserService {
 
         Session session = sessionList.getSession(id);
         session.login();
-        //Ir a la pantalla principal
+        return user;
     }
 
 //    public List<Score> getScore (User usuario){
@@ -78,12 +76,13 @@ public class UserService {
 //        return listapuntuaciones;
 //    }
 //
-//    public boolean logout(User user) {
-//        Session userSession = this.sessionList.getSession(user.getId());
-//        userSession.logout();
-//        //Ir a la pantalla principal
-//        return true;
-//    }
+    public void logout(User user) {
+        Session userSession = this.sessionList.getSession(user.getId());
+        if(userSession == null){
+            throw new RuntimeException("ERROR AL LOGOUT");
+        }
+        userSession.logout();
+    }
 //
 //    public boolean DeleteAccount(User user) {
 //        this.userList.deleteUser(user.getId());
