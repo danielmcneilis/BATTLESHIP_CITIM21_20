@@ -73,8 +73,13 @@ public class UserService {
     }
 
     public void deleteAccount(User user) {
-        this.userList.deleteUser(user.getId());
-        this.sessionList.deleteSession(user.getId());
+        String id = ExternalLDAP.LoginLDAP();
+        if(user.getId().equals(id)){
+            this.userList.deleteUser(user.getId());
+            this.sessionList.deleteSession(user.getId());
+        } else {
+            throw new RuntimeException("ERROR DELETE USER");
+        }
     }
 
     public void changeUserName(User user) throws IOException {
