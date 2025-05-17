@@ -77,18 +77,33 @@ public class UserService {
         this.sessionList.deleteSession(user.getId());
     }
 
-//    public boolean changeUserName(User user, String newUserName) throws IOException {
-//        if (!user.isValidUserName()) {
-//            throw new RuntimeException("INVALID USERNAME");
-//        }
-//
-//        if (userList.getUserByUsername(newUserName)) {
-//            throw new RuntimeException("INVALID USERNAME");
-//        }
-//
-//        user.setUsername(newUserName);
-//        return true;
-//    }
+    public void changeUserName(User user) throws IOException {
+        Scanner scanner = new Scanner(System.in);
+        String username;
+        boolean correcto = isSure(user.getUsername());
+        if(correcto){
+            do {
+                System.out.println("Introduce un nuevo nombre de usuario");
+                username = scanner.nextLine();
+                if (userList.getUserByUsername(username) != null) {
+                    throw new RuntimeException("CHANGE NAME NOT POSIBLE");
+                }
+                user.setUsername(username);
+            } while (!user.isValidUserName());
+        }
+    }
+
+    private boolean isSure(String actualUsername){
+        Scanner scanner = new Scanner(System.in);
+        String username;
+        System.out.println("Para cambiar el nombre tienes que introducir tu nombre actual ");
+        do {
+            System.out.print("Introduce tu nombre de usuario actual: ");
+            username = scanner.nextLine();
+        }while (!username.equals(actualUsername));
+
+        return true;
+    }
 
 //    public List<Score> getScore (User usuario){
 //        UPMUsers rol =  get_UPM_AccountRol(usuario.getEmail());

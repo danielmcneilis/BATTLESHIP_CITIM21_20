@@ -68,6 +68,8 @@ public class CLI {
                 break;
             case 3:
                 // TODO Cambiar Nombre Usuario
+                userService.changeUserName(userLoggeado);
+                menuPrincipal(userLoggeado);
                 break;
             case 4:
                 userService.logout(userLoggeado);
