@@ -20,8 +20,16 @@ public class UserService {
     }
 
     public void userRegister() throws IOException {
-        String id = ExternalLDAP.LoginLDAP();
-        String username = userList.getUserByUsername(id).getUsername();
+        String id = ExternalLDAP.LoginLDAP(); // unico para cada usuario
+        Scanner scanner = new Scanner(System.in);
+        String username;
+        System.out.println("Introduce un nombre de usuario");
+        do{
+            username = scanner.nextLine();
+        }while ();
+        // crearlo
+
+
 
         Scanner scanner = new Scanner(System.in);
         String email = scanner.nextLine();
