@@ -25,7 +25,7 @@ public class App
         User pepe = userRepository.createUser("pepe", "pepe");
         sessionRepository.createSession(pepe, "pepe@alumnos.upm.es");
         cli.menuLogin();
-        gameService.startGame(pepe);
+        //gameService.startGame(pepe);
 
     }
 }

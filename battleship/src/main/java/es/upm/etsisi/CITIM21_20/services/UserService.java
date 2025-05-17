@@ -17,6 +17,7 @@ public class UserService {
 
     public UserService(IUserRepository userList, ISessonRepository sessionList) {
         this.userList = userList;
+        this.sessionList = sessionList;
     }
 
     public void userRegister() throws IOException {
@@ -36,12 +37,13 @@ public class UserService {
         do {
             System.out.println("Introduce un nombre de usuario");
             username = scanner.nextLine();
+            if (userList.getUserByUsername(username) != null) {
+                throw new RuntimeException("REGISTRATION NOT POSIBLE");
+            }
             createdUser = userList.createUser(username, id);
         } while (createdUser == null);
 
-        if (userList.getUserByUsername(username) != null) {
-            throw new RuntimeException("REGISTRATION NOT POSIBLE");
-        }
+
 
         sessionList.createSession(createdUser, id);
         System.out.println("Usuario registrado correctamente");
