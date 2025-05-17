@@ -61,7 +61,6 @@ public class CLI {
 
         switch (option){
             case 1:
-                // TODO Comenzar partida
                 this.gameService.startGame(userLoggeado);
                 break;
             case 2:

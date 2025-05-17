@@ -65,6 +65,33 @@ public class UserService {
         return user;
     }
 
+    public void logout(User user) {
+        Session userSession = this.sessionList.getSession(user.getId());
+        if(userSession == null){
+            throw new RuntimeException("ERROR AL LOGOUT");
+        }
+        userSession.logout();
+    }
+
+    public boolean DeleteAccount(User user) {
+        this.userList.deleteUser(user.getId());
+        this.sessionList.deleteSession(user.getId());
+        return true;
+    }
+
+//    public boolean changeUserName(User user, String newUserName) throws IOException {
+//        if (!user.isValidUserName()) {
+//            throw new RuntimeException("INVALID USERNAME");
+//        }
+//
+//        if (userList.getUserByUsername(newUserName)) {
+//            throw new RuntimeException("INVALID USERNAME");
+//        }
+//
+//        user.setUsername(newUserName);
+//        return true;
+//    }
+
 //    public List<Score> getScore (User usuario){
 //        UPMUsers rol =  get_UPM_AccountRol(usuario.getEmail());
 //        List<Score> listapuntuaciones = new ArrayList<>();
@@ -74,21 +101,6 @@ public class UserService {
 //            listapuntuaciones = adminScore(usuario.getUsername());
 //        }
 //        return listapuntuaciones;
-//    }
-//
-    public void logout(User user) {
-        Session userSession = this.sessionList.getSession(user.getId());
-        if(userSession == null){
-            throw new RuntimeException("ERROR AL LOGOUT");
-        }
-        userSession.logout();
-    }
-//
-//    public boolean DeleteAccount(User user) {
-//        this.userList.deleteUser(user.getId());
-//        this.sessionList.deleteSession(user.getId());
-//        //Ir a la pantalla principal
-//        return true;
 //    }
 //
 //    public boolean changeUserName(User user, String newUserName) throws IOException {
