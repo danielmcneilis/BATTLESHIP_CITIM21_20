@@ -22,6 +22,9 @@ public class User implements IJugador {
     private String username;
     @Getter
     private String id;
+    @Getter
+    @Setter
+    private boolean isAdmin;
     private List<IPuntuacion> score;
     private List<IMovimiento> attackList;
 
@@ -34,6 +37,7 @@ public class User implements IJugador {
         this.id = id;
         this.score = new ArrayList<IPuntuacion>();
         this.attackList = new ArrayList<IMovimiento>();
+        this.isAdmin = false;
     }
 
     public boolean isValidUserName() throws IOException {
@@ -89,7 +93,7 @@ public class User implements IJugador {
 
     @Override
     public void addPuntuacion(IPuntuacion iPuntuacion) {
-
+        this.score.add(iPuntuacion);
     }
 
     @Override

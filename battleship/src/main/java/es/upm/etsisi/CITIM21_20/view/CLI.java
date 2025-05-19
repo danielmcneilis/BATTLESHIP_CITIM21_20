@@ -1,5 +1,7 @@
 package es.upm.etsisi.CITIM21_20.view;
 import es.upm.etsisi.CITIM21_20.models.User;
+import es.upm.etsisi.CITIM21_20.repositories.SessionRepository;
+import es.upm.etsisi.CITIM21_20.repositories.UserRepository;
 import es.upm.etsisi.CITIM21_20.services.GameService;
 import es.upm.etsisi.CITIM21_20.services.UserService;
 import es.upm.etsisi.fis.model.IJugador;
@@ -9,23 +11,52 @@ import java.util.Scanner;
 
 public class CLI {
 
+    private UserRepository userRepository;
+    private SessionRepository sessionRepository;
     private UserService userService;
     private GameService gameService;
     private static CLI instance;
 
-    public static CLI getInstance(UserService userService, GameService gameService){
+
+    private static CLI getInstance(){
         if(instance == null){
-            instance = new CLI(userService, gameService);
+            instance = new CLI();
         }
         return instance;
     }
 
-    private CLI(UserService userService, GameService gameService){
-        this.gameService = gameService;
-        this.userService = userService;
+    public CLI(){
+        this.userRepository = UserRepository.getInstance();
+        this.sessionRepository = SessionRepository.getInstance();
+        this.gameService = new GameService(new Scanner(System.in));
+        this.userService = new UserService(userRepository, sessionRepository);
+        this.excute();
     }
 
-    public void menuLogin() throws IOException {
+    public static void main(String[] args) {
+        CLI.getInstance();
+    }
+
+    private void excute() {
+        this.startErrorHandling();
+    }
+
+    private void startErrorHandling() {
+        boolean out = false;
+        while (!out) {
+            try {
+                out = this.menuLogin();
+            } catch (Exception exception) {
+                launchError(exception);
+            }
+        }
+    }
+
+    private static void launchError(Exception exception) {
+        System.out.println("---ERROR---> " + exception.getClass().getSimpleName() + " : " + exception.getMessage());
+    }
+
+    public boolean menuLogin() throws IOException {
         int option;
         User userLoggeado = null;
         do {
@@ -38,16 +69,17 @@ public class CLI {
             case 1:
                 userLoggeado = this.userService.login();
                 menuPrincipal(userLoggeado);
-                break;
+                return false;
             case 2:
                 userLoggeado = this.userService.userRegister();
                 // TODO: se puede pasar como parámetro el usuario o aumenta el acoplamiento?
                 menuPrincipal(userLoggeado);
-                break;
+                return false;
             case 3:
-                break;
+                return true;
             default:
                 System.out.println("ERROR");
+                return false;
         }
     }
 
@@ -102,4 +134,15 @@ public class CLI {
         System.out.println("2-. Registrarse.");
         System.out.println("3-. Salir");
     }
+
+    private void mostrarPuntuaciones (List<IPuntuacion> scores){
+        System.out.println("--------------Puntuaciones--------------");
+        int i = 1;
+        for (IPuntuacion puntuacion : scores) {
+            System.out.println("Partida " + i + ":" + "---->" + puntuacion.getPuntos());
+            i++;
+        }
+
+    }
+
 }

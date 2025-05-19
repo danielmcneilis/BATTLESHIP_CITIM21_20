@@ -1,5 +1,6 @@
 package es.upm.etsisi.CITIM21_20.services;
 
+import es.upm.etsisi.CITIM21_20.models.Score;
 import es.upm.etsisi.CITIM21_20.models.Session;
 import es.upm.etsisi.CITIM21_20.models.User;
 import es.upm.etsisi.CITIM21_20.repositories.ISessonRepository;
@@ -27,31 +28,32 @@ public class UserService {
         User createdUser;
 
         if (id == null) {
-            throw new RuntimeException("ERROR LDAP");
+            throw new RuntimeException("ERROR IN LDAP LOGIN");
         }
 
         if (userList.getUser(id) != null) {
-            throw new RuntimeException("INVALID USER");
+            throw new RuntimeException("USER ALREADY REGISTERED");
         }
 
         do {
             System.out.println("Introduce un nombre de usuario");
             username = scanner.nextLine();
             if (userList.getUserByUsername(username) != null) {
-                throw new RuntimeException("REGISTRATION NOT POSIBLE");
+                System.out.println("USERNAME ALREADY EXISTS, TRY ANOTHER ONE :) ");
             }
             createdUser = userList.createUser(username, id);
         } while (createdUser == null);
 
         sessionList.createSession(createdUser, id);
+        createdUser.setAdmin(false);
         return createdUser;
     }
 
-    public User login() {
+    public User login(){
         String id = ExternalLDAP.LoginLDAP();
 
         if (id == null) {
-            throw new RuntimeException("INVALID USERNAME");
+            throw new RuntimeException("ERROR IN LDAP LOGIN");
         }
 
         User user = userList.getUser(id);
@@ -67,9 +69,14 @@ public class UserService {
     public void logout(User user) {
         Session userSession = this.sessionList.getSession(user.getId());
         if(userSession == null){
-            throw new RuntimeException("ERROR AL LOGOUT");
+            System.out.println("USER NOT FOUND");
         }
-        userSession.logout();
+       if (userSession.logout()){
+           System.out.println("LOGOUT SUCCESSFUL");
+       }
+       else{
+           System.out.println("LOGOUT FAILED");
+       }
     }
 
     public void deleteAccount(User user) {
@@ -78,7 +85,7 @@ public class UserService {
             this.userList.deleteUser(user.getId());
             this.sessionList.deleteSession(user.getId());
         } else {
-            throw new RuntimeException("ERROR DELETE USER");
+            throw new RuntimeException("ERROR LOGIN LDAP");
         }
     }
 
@@ -91,7 +98,7 @@ public class UserService {
                 System.out.println("Introduce un nuevo nombre de usuario");
                 username = scanner.nextLine();
                 if (userList.getUserByUsername(username) != null) {
-                    throw new RuntimeException("CHANGE NAME NOT POSIBLE");
+                    System.out.println("CHANGE NAME NOT POSIBLE");
                 }
                 user.setUsername(username);
             } while (!user.isValidUserName());
@@ -110,74 +117,69 @@ public class UserService {
         return true;
     }
 
-//    public List<Score> getScore (User usuario){
-//        UPMUsers rol =  get_UPM_AccountRol(usuario.getEmail());
-//        List<Score> listapuntuaciones = new ArrayList<>();
-//        if(rol == UPMUsers.ALUMNO){
-//            listapuntuaciones = userScore(usuario.getUsername());
-//        } else if (rol == UPMUsers.PDI) { // no tendria que ser esto admin????
-//            listapuntuaciones = adminScore(usuario.getUsername());
-//        }
-//        return listapuntuaciones;
-//    }
-//
-//    public boolean changeUserName(User user, String newUserName) throws IOException {
-//        if (!user.isValidUserName()) {
-//            throw new RuntimeException("INVALID USERNAME");
-//        }
-//
-//        if (userList.getUserByUsername(newUserName)) {
-//            throw new RuntimeException("INVALID USERNAME");
-//        }
-//
-//        user.setUsername(newUserName);
-//        return true;
-//    }
-//
-//    // PDI-----> profesores
-//    // PAS ----->
-//    private List<Score> adminScore(String nombreusuario){
-//        // el admin puede ver todas las puntuaciones, pero si puede ver todas, para que le paso un nombre como parametro
-//        List<Score> listapuntuaciones = new ArrayList<>();
-//        for (User savedUsers : userList.values()){ // me recorre el mapa entero con los valores
-//            listapuntuaciones.addAll(savedUsers.getScoreList()); // me guarda toda su lista de puntuaciones
-//        }
-//        return listapuntuaciones;
-//    }
-//
-//    private List<Score> userScore(String nombreusuario){ // ver las 10 mejores partidas suyas
-//        User usuario = userList.get(nombreusuario); // No se si usamos el nombre de usuario o su id que devulve el LDAP
-//        List<Score> top10 = new ArrayList<>();
-//        List<Score> nueva = CloneList(usuario.getScoreList());
-//        if(usuario != null) {
-//            // ordenar la lista de puntuaciones //bublesort // no puedo usar for, necesito con objetos
-//            for(int i = 0; i< 10; i++){
-//                Score maximo = new Score();
-//                Iterator<Score> it = usuario.getScoreList().iterator();
-//                while (it.hasNext()){
-//                    Score x = it.next();
-//                    if(x.getPuntos() > maximo.getPuntos()){ // aqui no me haria falta el !(x.equals(maximo)) porque como los elimino
-//                        maximo = x;
-//                    }
-//                }
-//                top10.add(maximo);
-//                nueva.remove(maximo);
-//            }
-//        }
-//        return top10; // el problema con esto es que que pasa si me lo devuelven vacio, tenemos que implementar manejor de excepciones??
-//
-//    }
-//
-//
-//    private List<Score> CloneList(List<Score> original){ // para no borrar contenido de la original
-//        List<Score> clone = new ArrayList<>();
-//        Iterator<Score> it = original.iterator();
-//        while(it.hasNext()){
-//            Score x = it.next();
-//            clone.add(x);
-//        }
-//        return clone;
-//    }
+
+    public List<IPuntuacion> getScore (User usuario){
+        List<IPuntuacion> listapuntuaciones = new ArrayList<>();
+        if(usuario.isAdmin()){
+            System.out.println("SOY ADMIN");
+            listapuntuaciones = adminScore(usuario.getUsername());
+
+        } else{
+            System.out.println("SOY ALUMNº");
+            listapuntuaciones = userScore(usuario.getUsername());
+
+        }
+        return listapuntuaciones;
+    }
+
+
+    private List<IPuntuacion> adminScore(String nombreusuario){
+        // el admin puede ver todas las puntuaciones, pero si puede ver todas, para que le paso un nombre como parametro
+        List<IPuntuacion> listapuntuaciones = new ArrayList<>();
+        for(User user : userList.valores()){
+            for(IPuntuacion puntuacion : user.getPuntuaciones()){
+                listapuntuaciones.add(puntuacion);
+            }
+        }
+
+        return listapuntuaciones;
+    }
+
+    private List<IPuntuacion> userScore(String nombreusuario){ // ver las 10 mejores partidas suyas
+        User usuario = userList.getUserByUsername(nombreusuario); // necesito sacarlo del hashmap
+        List<IPuntuacion> top10 = new ArrayList<>();
+        List<IPuntuacion> nueva = CloneList(usuario.getPuntuaciones());
+        if(usuario == null) {
+            System.out.println("USER NOT FOUND");
+        }else {
+            // ordenar la lista de puntuaciones //bublesort // no puedo usar for, necesito con objetos
+            for (int i = 0; i < 10; i++) {
+                IPuntuacion maximo = new Score();
+                Iterator<IPuntuacion> it = usuario.getPuntuaciones().iterator();
+                while (it.hasNext()) {
+                    IPuntuacion x = it.next();
+                    if (x.getPuntos() > maximo.getPuntos()) { // aqui no me haria falta el !(x.equals(maximo)) porque como los elimino
+                        maximo = x;
+                    }
+                }
+                top10.add(maximo);
+                nueva.remove(maximo);
+            }
+        }
+        return top10; // el problema con esto es que que pasa si me lo devuelven vacio, tenemos que implementar manejor de excepciones?
+    }
+
+
+    private List<IPuntuacion> CloneList(List<IPuntuacion> original){ // para no borrar contenido de la original
+        List<IPuntuacion> clone = new ArrayList<>();
+        Iterator<IPuntuacion> it = original.iterator();
+        while(it.hasNext()){
+            IPuntuacion x = it.next();
+            clone.add(x);
+        }
+        return clone;
+    }
+
 
 
 

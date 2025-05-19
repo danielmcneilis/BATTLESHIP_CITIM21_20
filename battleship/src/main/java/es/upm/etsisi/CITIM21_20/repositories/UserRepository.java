@@ -54,4 +54,15 @@ public class UserRepository implements IUserRepository {
     public void deleteUser(String id) {
         this.userList.remove(id);
     }
+
+    public ArrayList<User> valores(){
+        ArrayList<User> lista = new ArrayList<>();
+        for(User user : userList.values()){
+            lista.add(user);
+        }
+        return lista;
+
+    }
+
+
 }

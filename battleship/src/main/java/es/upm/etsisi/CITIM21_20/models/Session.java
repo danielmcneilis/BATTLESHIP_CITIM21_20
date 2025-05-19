@@ -26,6 +26,7 @@ public class Session {
 
     public void login() {
         this.active = true;
+        System.out.println("LAST LOGIN: " + DateTimeFormatter.dateFormater(lastLogin));
         this.lastLogin = LocalDateTime.now();
     }
 
@@ -34,7 +35,7 @@ public class Session {
             return false;
         }
         this.active = false;
-        this.lastLogin = LocalDateTime.now();
         return true;
     }
+
 }
