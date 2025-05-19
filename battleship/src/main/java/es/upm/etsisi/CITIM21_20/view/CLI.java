@@ -5,8 +5,10 @@ import es.upm.etsisi.CITIM21_20.repositories.UserRepository;
 import es.upm.etsisi.CITIM21_20.services.GameService;
 import es.upm.etsisi.CITIM21_20.services.UserService;
 import es.upm.etsisi.fis.model.IJugador;
+import es.upm.etsisi.fis.model.IPuntuacion;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Scanner;
 
 public class CLI {
