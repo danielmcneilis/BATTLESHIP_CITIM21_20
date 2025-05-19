@@ -14,4 +14,6 @@ public interface IUserRepository {
     User createUser(String username, String id) throws IOException;
 
     void deleteUser(String id);
+
+    ArrayList<User> valores();
 }
