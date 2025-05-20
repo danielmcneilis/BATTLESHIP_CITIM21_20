@@ -98,11 +98,11 @@ public class User implements IJugador {
 
     @Override
     public List<IMovimiento> getMovimientos() {
-        return List.of();
+        return attackList;
     }
 
     @Override
     public List<IPuntuacion> getPuntuaciones() {
-        return List.of();
+        return score;
     }
 }

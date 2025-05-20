@@ -22,8 +22,8 @@ public class Score implements IPuntuacion {
     @Override
     public IPuntuacion clonePuntuacion() { // no estoy seguro si seria algo asi
         IPuntuacion clone = new Score(); //  he usado esto porque no queria crear un nuevo contructor
-        clone.setPuntuacion(this.score);
-        clone.setPartidaId(this.partidaAsociada);
+        //clone.setPuntuacion(this.score);
+        //clone.setPartidaId(this.partidaAsociada);
         return clone;
     }
 
