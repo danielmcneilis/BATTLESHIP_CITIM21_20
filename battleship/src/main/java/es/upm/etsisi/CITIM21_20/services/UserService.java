@@ -123,7 +123,7 @@ public class UserService {
         List<IPuntuacion> listapuntuaciones = new ArrayList<>();
         if(usuario.isAdmin()){
             System.out.println("SOY ADMIN");
-            listapuntuaciones = adminScore(usuario.getUsername());
+            listapuntuaciones = adminScore();
 
         } else{
             System.out.println("SOY ALUMNº");
@@ -134,7 +134,7 @@ public class UserService {
     }
 
 
-    private List<IPuntuacion> adminScore(String nombreusuario){
+    private List<IPuntuacion> adminScore(){
         // el admin puede ver todas las puntuaciones, pero si puede ver todas, para que le paso un nombre como parametro
         List<IPuntuacion> listapuntuaciones = new ArrayList<>();
         for(User user : userList.valores()){

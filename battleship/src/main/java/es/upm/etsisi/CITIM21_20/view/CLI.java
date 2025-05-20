@@ -95,10 +95,13 @@ public class CLI {
 
         switch (option){
             case 1:
+                // empezar partida
                 this.gameService.startGame(userLoggeado);
                 break;
             case 2:
-                // TODO Ver Puntuacion
+                //mostrar puntuacion
+                List<IPuntuacion> puntuaciones = this.userService.getScore(userLoggeado);
+                mostrarPuntuaciones(puntuaciones);
                 break;
             case 3:
                 // TODO Cambiar Nombre Usuario
@@ -106,6 +109,7 @@ public class CLI {
                 menuPrincipal(userLoggeado);
                 break;
             case 4:
+                // cerrar sesion
                 userService.logout(userLoggeado);
                 menuLogin();
                 break;
@@ -141,7 +145,7 @@ public class CLI {
         System.out.println("--------------Puntuaciones--------------");
         int i = 1;
         for (IPuntuacion puntuacion : scores) {
-            System.out.println("Partida " + i + ":" + "---->" + puntuacion.getPuntos());
+            System.out.println("Partida " + i + ":" + "----> " + puntuacion.getPuntos());
             i++;
         }
 
