@@ -154,13 +154,13 @@ public class UserService {
             System.out.println("USER NOT FOUND");
         }else {
             // ordenar la lista de puntuaciones //bublesort // no puedo usar for, necesito con objetos
-            for (int i = 0; i < 10; i++) {
+            for (IPuntuacion puntuacion : nueva) {
                 IPuntuacion maximo = new Score();
-                Iterator<IPuntuacion> it = usuario.getPuntuaciones().iterator();
+                Iterator<IPuntuacion> it = nueva.iterator();
                 while (it.hasNext()) {
                     IPuntuacion x = it.next();
-                    if (x.getPuntos() > maximo.getPuntos()) { // aqui no me haria falta el !(x.equals(maximo)) porque como los elimino
-                        maximo = x;
+                    if (puntuacion.getPuntos() > x.getPuntos()) { // aqui no me haria falta el !(x.equals(maximo)) porque como los elimino
+                        maximo = puntuacion;
                     }
                 }
                 top10.add(maximo);
