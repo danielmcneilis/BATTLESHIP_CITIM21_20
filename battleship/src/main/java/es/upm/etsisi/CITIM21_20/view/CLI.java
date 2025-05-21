@@ -97,11 +97,13 @@ public class CLI {
             case 1:
                 // empezar partida
                 this.gameService.startGame(userLoggeado);
+                menuPrincipal(userLoggeado);
                 break;
             case 2:
                 //mostrar puntuacion
                 List<IPuntuacion> puntuaciones = this.userService.getScore(userLoggeado);
                 mostrarPuntuaciones(puntuaciones);
+                menuPrincipal(userLoggeado);
                 break;
             case 3:
                 // TODO Cambiar Nombre Usuario
