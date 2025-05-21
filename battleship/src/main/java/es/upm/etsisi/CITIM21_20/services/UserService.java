@@ -34,7 +34,6 @@ public class UserService implements  IUserService{
         if (id == null) {
             throw new RuntimeException("ERROR IN LDAP LOGIN");
         }
-
         if (userList.getUser(id) != null) {
             throw new RuntimeException("USER ALREADY REGISTERED");
         }

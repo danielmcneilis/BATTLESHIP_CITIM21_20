@@ -2,6 +2,8 @@ package es.upm.etsisi.CITIM21_20.view;
 
 import es.upm.etsisi.CITIM21_20.models.Score;
 import es.upm.etsisi.CITIM21_20.models.User;
+import es.upm.etsisi.CITIM21_20.repositories.ISessonRepository;
+import es.upm.etsisi.CITIM21_20.repositories.IUserRepository;
 import es.upm.etsisi.CITIM21_20.repositories.SessionRepository;
 import es.upm.etsisi.CITIM21_20.repositories.UserRepository;
 import es.upm.etsisi.CITIM21_20.services.*;
@@ -13,22 +15,22 @@ import java.util.Scanner;
 
 public class CLI {
 
-    private UserRepository userRepository;
-    private SessionRepository sessionRepository;
+    private IUserRepository userRepository;
+    private ISessonRepository sessionRepository;
     private IUserService userService;
     private IGameService gameService;
     private IScoreService scoreService;
     private static CLI instance;
 
 
-    private static CLI getInstance() {
+    public static CLI getInstance() {
         if (instance == null) {
             instance = new CLI();
         }
         return instance;
     }
 
-    public CLI() {
+    private CLI() {
         this.userRepository = UserRepository.getInstance();
         this.sessionRepository = SessionRepository.getInstance();
         this.gameService = new GameService(new Scanner(System.in));
