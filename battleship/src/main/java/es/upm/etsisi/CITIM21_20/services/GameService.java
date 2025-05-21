@@ -24,7 +24,6 @@ public class GameService {
         IMovimiento movimiento = new Movement();
 
         controladorPartida.crearPartida(usuariologued, puntuacion, movimiento);
-        usuariologued.addPuntuacion(puntuacion);
     }
 
 }

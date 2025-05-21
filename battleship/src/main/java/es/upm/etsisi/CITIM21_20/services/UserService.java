@@ -152,20 +152,21 @@ public class UserService {
         List<IPuntuacion> nueva = CloneList(usuario.getPuntuaciones());
         if(usuario == null) {
             System.out.println("USER NOT FOUND");
-        }else {
-            // ordenar la lista de puntuaciones //bublesort // no puedo usar for, necesito con objetos
-            for (IPuntuacion puntuacion : nueva) {
-                IPuntuacion maximo = new Score();
-                Iterator<IPuntuacion> it = nueva.iterator();
-                while (it.hasNext()) {
-                    IPuntuacion x = it.next();
-                    if (puntuacion.getPuntos() > x.getPuntos()) { // aqui no me haria falta el !(x.equals(maximo)) porque como los elimino
-                        maximo = puntuacion;
-                    }
+            return top10;
+        }
+
+        while (!nueva.isEmpty() && top10.size() < 10) {
+            Iterator<IPuntuacion> it = nueva.iterator();
+            IPuntuacion max = it.next(); // asumimos que hay al menos uno
+
+            while (it.hasNext()) {
+                IPuntuacion actual = it.next();
+                if ((actual.getPuntos() > max.getPuntos()) && actual.getPuntos() != 0) {
+                    max = actual;
                 }
-                top10.add(maximo);
-                nueva.remove(maximo);
             }
+            top10.add(max);
+            nueva.remove(max);
         }
         return top10; // el problema con esto es que que pasa si me lo devuelven vacio, tenemos que implementar manejor de excepciones?
     }
