@@ -22,11 +22,14 @@ public class User implements IJugador {
     private String username;
     @Getter
     private String id;
+    @Getter
+    @Setter
+    private boolean isAdmin;
     private List<IPuntuacion> score;
     private List<IMovimiento> attackList;
 
 
-    public User(String username, String id) {
+    public User(String username, String id) throws IOException {
         if (!this.isValidUserName()){
             throw new RuntimeException("INVALID USERNAME");
         }
@@ -34,10 +37,11 @@ public class User implements IJugador {
         this.id = id;
         this.score = new ArrayList<IPuntuacion>();
         this.attackList = new ArrayList<IMovimiento>();
+        this.isAdmin = false;
     }
 
     public boolean isValidUserName() throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader("black_list.txt"));
+        BufferedReader reader = new BufferedReader(new FileReader("src/main/java/es/upm/etsisi/CITIM21_20/black_list.txt"));
         String line;
 
         while ((line = reader.readLine()) != null) {
@@ -89,16 +93,16 @@ public class User implements IJugador {
 
     @Override
     public void addPuntuacion(IPuntuacion iPuntuacion) {
-
+        this.score.add(iPuntuacion);
     }
 
     @Override
     public List<IMovimiento> getMovimientos() {
-        return List.of();
+        return attackList;
     }
 
     @Override
     public List<IPuntuacion> getPuntuaciones() {
-        return List.of();
+        return score;
     }
 }

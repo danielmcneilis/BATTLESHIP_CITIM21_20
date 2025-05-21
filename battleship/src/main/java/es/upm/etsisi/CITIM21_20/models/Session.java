@@ -10,21 +10,23 @@ public class Session {
 
     @Getter
     private User user;
-    private UPMUsers role;
     @Getter
     private boolean active;
+    @Getter
+    private String id;
     private LocalDateTime lastLogin;
 
 
-    public Session(User user, String email) {
+    public Session(User user, String id) {
         this.user = user;
-        this.role = ObtencionDeRol.get_UPM_AccountRol(email);
+        this.id = id;
         this.active = true;
         this.lastLogin = LocalDateTime.now();
     }
 
     public void login() {
         this.active = true;
+        System.out.println("LAST LOGIN: " + DateTimeFormatter.dateFormater(lastLogin));
         this.lastLogin = LocalDateTime.now();
     }
 
@@ -33,7 +35,7 @@ public class Session {
             return false;
         }
         this.active = false;
-        this.lastLogin = LocalDateTime.now();
         return true;
     }
+
 }

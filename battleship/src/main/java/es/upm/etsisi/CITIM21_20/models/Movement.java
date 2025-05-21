@@ -9,6 +9,7 @@ public class Movement implements IMovimiento {
     private int columna;
     private Long id;
     private long time;
+    private boolean impact;
 
     public Movement() {
         fila = 0;
@@ -46,4 +47,6 @@ public class Movement implements IMovimiento {
     public void setTime(long l) {
         this.time = l;
     }
+
+
 }

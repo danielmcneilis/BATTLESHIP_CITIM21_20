@@ -5,17 +5,11 @@ import es.upm.etsisi.CITIM21_20.models.Session;
 import es.upm.etsisi.CITIM21_20.models.User;
 import es.upm.etsisi.CITIM21_20.repositories.ISessonRepository;
 import es.upm.etsisi.CITIM21_20.repositories.IUserRepository;
+import es.upm.etsisi.fis.model.IPuntuacion;
 import servidor.ExternalLDAP;
-import servidor.UPMUsers;
-import utilidades.Cifrado;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-
-import static servidor.ObtencionDeRol.get_UPM_AccountRol;
+import java.util.*;
 
 public class UserService {
 
@@ -25,34 +19,42 @@ public class UserService {
 
     public UserService(IUserRepository userList, ISessonRepository sessionList) {
         this.userList = userList;
+        this.sessionList = sessionList;
     }
 
-    public void userRegister(String username, String email) throws IOException {
-        String id = ExternalLDAP.LoginLDAP();
+    public User userRegister() throws IOException {
+        String id = ExternalLDAP.LoginLDAP(); // unico para cada usuario
+        Scanner scanner = new Scanner(System.in);
+        String username;
+        User createdUser;
+
         if (id == null) {
-            throw new RuntimeException("ERROR LDAP");
+            throw new RuntimeException("ERROR IN LDAP LOGIN");
         }
 
         if (userList.getUser(id) != null) {
-            throw new RuntimeException("INVALID USERNAME");
+            throw new RuntimeException("USER ALREADY REGISTERED");
         }
 
-        if (userList.getUserByUsername(username)) {
-            throw new RuntimeException("INVALID USERNAME");
-        }
+        do {
+            System.out.println("Introduce un nombre de usuario");
+            username = scanner.nextLine();
+            if (userList.getUserByUsername(username) != null) {
+                System.out.println("USERNAME ALREADY EXISTS, TRY ANOTHER ONE :) ");
+            }
+            createdUser = userList.createUser(username, id);
+        } while (createdUser == null);
 
-        if (username.length() < 3 || username.length() > 10) {
-            throw new RuntimeException("INVALID USERNAME");
-        }
-
-        User user = userList.createUser(username, id);
-        sessionList.createSession(user, email);
+        sessionList.createSession(createdUser, id);
+        createdUser.setAdmin(false);
+        return createdUser;
     }
 
-    public boolean login() throws IOException {
+    public User login(){
         String id = ExternalLDAP.LoginLDAP();
+
         if (id == null) {
-            throw new RuntimeException("INVALID USERNAME");
+            throw new RuntimeException("ERROR IN LDAP LOGIN");
         }
 
         User user = userList.getUser(id);
@@ -62,92 +64,124 @@ public class UserService {
 
         Session session = sessionList.getSession(id);
         session.login();
-        //Ir a la pantalla principal
-        return true;
+        return user;
     }
 
-    public List<Score> getScore (User usuario){
-        UPMUsers rol =  get_UPM_AccountRol(usuario.getEmail());
-        List<Score> listapuntuaciones = new ArrayList<>();
-        if(rol == UPMUsers.ALUMNO){
-            listapuntuaciones = userScore(usuario.getUsername());
-        } else if (rol == UPMUsers.PDI) { // no tendria que ser esto admin????
-            listapuntuaciones = adminScore(usuario.getUsername());
-        }
-        return listapuntuaciones;
-    }
-
-    public boolean logout(User user) {
+    public void logout(User user) {
         Session userSession = this.sessionList.getSession(user.getId());
-        userSession.logout();
-        //Ir a la pantalla principal
-        return true;
-    }
-
-    public boolean DeleteAccount(User user) {
-        this.userList.deleteUser(user.getId());
-        this.sessionList.deleteSession(user.getId());
-        //Ir a la pantalla principal
-        return true;
-    }
-
-    public boolean changeUserName(User user, String newUserName) throws IOException {
-        if (!user.isValidUserName()) {
-            throw new RuntimeException("INVALID USERNAME");
+        if(userSession == null){
+            System.out.println("USER NOT FOUND");
         }
+       if (userSession.logout()){
+           System.out.println("LOGOUT SUCCESSFUL");
+       }
+       else{
+           System.out.println("LOGOUT FAILED");
+       }
+    }
 
-        if (userList.getUserByUsername(newUserName)) {
-            throw new RuntimeException("INVALID USERNAME");
+    public void deleteAccount(User user) {
+        String id = ExternalLDAP.LoginLDAP();
+        if(user.getId().equals(id)){
+            this.userList.deleteUser(user.getId());
+            this.sessionList.deleteSession(user.getId());
+        } else {
+            throw new RuntimeException("ERROR LOGIN LDAP");
         }
+    }
 
-        user.setUsername(newUserName);
+    public void changeUserName(User user) throws IOException {
+        Scanner scanner = new Scanner(System.in);
+        String username;
+        boolean correcto = isSure(user.getUsername());
+        if(correcto){
+            do {
+                System.out.println("Introduce un nuevo nombre de usuario");
+                username = scanner.nextLine();
+                if (userList.getUserByUsername(username) != null) {
+                    System.out.println("CHANGE NAME NOT POSIBLE");
+                }
+                user.setUsername(username);
+            } while (!user.isValidUserName());
+        }
+    }
+
+    private boolean isSure(String actualUsername){
+        Scanner scanner = new Scanner(System.in);
+        String username;
+        System.out.println("Para cambiar el nombre tienes que introducir tu nombre actual ");
+        do {
+            System.out.print("Introduce tu nombre de usuario actual: ");
+            username = scanner.nextLine();
+        }while (!username.equals(actualUsername));
+
         return true;
     }
 
-    // PDI-----> profesores
-    // PAS ----->
-    private List<Score> adminScore(String nombreusuario){
-        // el admin puede ver todas las puntuaciones, pero si puede ver todas, para que le paso un nombre como parametro
-        List<Score> listapuntuaciones = new ArrayList<>();
-        for (User savedUsers : userList.values()){ // me recorre el mapa entero con los valores
-            listapuntuaciones.addAll(savedUsers.getScoreList()); // me guarda toda su lista de puntuaciones
+
+    public List<IPuntuacion> getScore (User usuario){
+        List<IPuntuacion> listapuntuaciones = new ArrayList<>();
+        if(usuario.isAdmin()){
+            System.out.println("SOY ADMIN");
+            listapuntuaciones = adminScore();
+
+        } else{
+            System.out.println("SOY ALUMNº");
+            listapuntuaciones = userScore(usuario.getUsername());
+
         }
         return listapuntuaciones;
     }
 
-    private List<Score> userScore(String nombreusuario){ // ver las 10 mejores partidas suyas
-        User usuario = userList.get(nombreusuario); // No se si usamos el nombre de usuario o su id que devulve el LDAP
-        List<Score> top10 = new ArrayList<>();
-        List<Score> nueva = CloneList(usuario.getScoreList());
-        if(usuario != null) {
-            // ordenar la lista de puntuaciones //bublesort // no puedo usar for, necesito con objetos
-            for(int i = 0; i< 10; i++){
-                Score maximo = new Score();
-                Iterator<Score> it = usuario.getScoreList().iterator();
-                while (it.hasNext()){
-                    Score x = it.next();
-                    if(x.getPuntos() > maximo.getPuntos()){ // aqui no me haria falta el !(x.equals(maximo)) porque como los elimino
-                        maximo = x;
-                    }
-                }
-                top10.add(maximo);
-                nueva.remove(maximo);
+
+    private List<IPuntuacion> adminScore(){
+        // el admin puede ver todas las puntuaciones, pero si puede ver todas, para que le paso un nombre como parametro
+        List<IPuntuacion> listapuntuaciones = new ArrayList<>();
+        for(User user : userList.valores()){
+            for(IPuntuacion puntuacion : user.getPuntuaciones()){
+                listapuntuaciones.add(puntuacion);
             }
         }
-        return top10; // el problema con esto es que que pasa si me lo devuelven vacio, tenemos que implementar manejor de excepciones??
 
+        return listapuntuaciones;
+    }
+
+    private List<IPuntuacion> userScore(String nombreusuario){ // ver las 10 mejores partidas suyas
+        User usuario = userList.getUserByUsername(nombreusuario); // necesito sacarlo del hashmap
+        List<IPuntuacion> top10 = new ArrayList<>();
+        List<IPuntuacion> nueva = CloneList(usuario.getPuntuaciones());
+        if(usuario == null) {
+            System.out.println("USER NOT FOUND");
+            return top10;
+        }
+
+        while (!nueva.isEmpty() && top10.size() < 10) {
+            Iterator<IPuntuacion> it = nueva.iterator();
+            IPuntuacion max = it.next(); // asumimos que hay al menos uno
+
+            while (it.hasNext()) {
+                IPuntuacion actual = it.next();
+                if ((actual.getPuntos() > max.getPuntos()) && actual.getPuntos() != 0) {
+                    max = actual;
+                }
+            }
+            top10.add(max);
+            nueva.remove(max);
+        }
+        return top10; // el problema con esto es que que pasa si me lo devuelven vacio, tenemos que implementar manejor de excepciones?
     }
 
 
-    private List<Score> CloneList(List<Score> original){ // para no borrar contenido de la original
-        List<Score> clone = new ArrayList<>();
-        Iterator<Score> it = original.iterator();
+    private List<IPuntuacion> CloneList(List<IPuntuacion> original){ // para no borrar contenido de la original
+        List<IPuntuacion> clone = new ArrayList<>();
+        Iterator<IPuntuacion> it = original.iterator();
         while(it.hasNext()){
-            Score x = it.next();
+            IPuntuacion x = it.next();
             clone.add(x);
         }
         return clone;
     }
+
 
 
 

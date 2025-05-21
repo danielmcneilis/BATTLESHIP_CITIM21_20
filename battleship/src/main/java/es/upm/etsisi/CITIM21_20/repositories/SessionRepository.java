@@ -26,7 +26,7 @@ public class SessionRepository implements ISessonRepository {
     @Override
     public Session getSession(String id) {
         for (Session session : sessions) {
-            if (session.getUser().getId().equals(id)) {
+            if (session.getId().equals(id)) {
                 return session;
             }
         }
@@ -34,15 +34,15 @@ public class SessionRepository implements ISessonRepository {
     }
 
     @Override
-    public void createSession(User user, String email) {
-        Session session = new Session(user, email);
+    public void createSession(User user, String id) {
+        Session session = new Session(user, id);
         sessions.add(session);
     }
 
     @Override
     public boolean deleteSession(String id) {
         for (Session session : sessions) {
-            if (session.getUser().getId().equals(id)) {
+            if (session.getId().equals(id)) {
                 sessions.remove(session);
                 return true;
             }
