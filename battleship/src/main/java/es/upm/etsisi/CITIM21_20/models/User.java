@@ -7,13 +7,12 @@ import es.upm.etsisi.fis.model.TBarcoAccionComplementaria;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 public class User implements IJugador {
 
@@ -30,7 +29,7 @@ public class User implements IJugador {
 
 
     public User(String username, String id) throws IOException {
-        if (!this.isValidUserName()){
+        if (!this.isValidUserName()) {
             throw new RuntimeException("INVALID USERNAME");
         }
         this.username = username;
@@ -73,10 +72,10 @@ public class User implements IJugador {
         do {
             fila = scanner.nextInt();
             columna = scanner.nextInt();
-            if (fila < 0 || fila > 9 || columna < 0 || columna > 9){
+            if (fila < 0 || fila > 9 || columna < 0 || columna > 9) {
                 System.out.println("INVALID POSITION");
             }
-        }while (fila < 0 || fila > 9 || columna < 0 || columna > 9);
+        } while (fila < 0 || fila > 9 || columna < 0 || columna > 9);
         int[] posicion = {fila, columna};
         return posicion;
     }

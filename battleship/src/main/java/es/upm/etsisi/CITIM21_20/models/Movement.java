@@ -1,7 +1,6 @@
 package es.upm.etsisi.CITIM21_20.models;
 
 import es.upm.etsisi.fis.model.IMovimiento;
-import lombok.Getter;
 
 public class Movement implements IMovimiento {
 
@@ -13,9 +12,9 @@ public class Movement implements IMovimiento {
 
     public Movement() {
         fila = 0;
-         columna = 0;
-         id = 0L;
-         time = 0L;
+        columna = 0;
+        id = 0L;
+        time = 0L;
     }
 
     @Override

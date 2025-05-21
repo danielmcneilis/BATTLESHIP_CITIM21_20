@@ -1,10 +1,10 @@
 package es.upm.etsisi.CITIM21_20.view;
+
 import es.upm.etsisi.CITIM21_20.models.User;
 import es.upm.etsisi.CITIM21_20.repositories.SessionRepository;
 import es.upm.etsisi.CITIM21_20.repositories.UserRepository;
 import es.upm.etsisi.CITIM21_20.services.GameService;
 import es.upm.etsisi.CITIM21_20.services.UserService;
-import es.upm.etsisi.fis.model.IJugador;
 import es.upm.etsisi.fis.model.IPuntuacion;
 
 import java.io.IOException;
@@ -20,14 +20,14 @@ public class CLI {
     private static CLI instance;
 
 
-    private static CLI getInstance(){
-        if(instance == null){
+    private static CLI getInstance() {
+        if (instance == null) {
             instance = new CLI();
         }
         return instance;
     }
 
-    public CLI(){
+    public CLI() {
         this.userRepository = UserRepository.getInstance();
         this.sessionRepository = SessionRepository.getInstance();
         this.gameService = new GameService(new Scanner(System.in));
@@ -65,9 +65,9 @@ public class CLI {
             mostrarMenuLogin();
             Scanner scanner = new Scanner(System.in);
             option = scanner.nextInt();
-        } while(option < 1 || option > 3 );
+        } while (option < 1 || option > 3);
 
-        switch (option){
+        switch (option) {
             case 1:
                 userLoggeado = this.userService.login();
                 menuPrincipal(userLoggeado);
@@ -91,9 +91,9 @@ public class CLI {
             mostrarMenuPrincipal();
             Scanner scanner = new Scanner(System.in);
             option = scanner.nextInt();
-        } while(option < 1 || option > 5 );
+        } while (option < 1 || option > 5);
 
-        switch (option){
+        switch (option) {
             case 1:
                 // empezar partida
                 this.gameService.startGame(userLoggeado);
@@ -124,7 +124,7 @@ public class CLI {
         }
     }
 
-    private void mostrarMenuPrincipal(){
+    private void mostrarMenuPrincipal() {
         System.out.println("--------------BIENVENIDO--------------");
         System.out.println("1-. Comenzar Partida.");
         System.out.println("2-. Ver Puntuacion.");
@@ -134,14 +134,14 @@ public class CLI {
 
     }
 
-    private void mostrarMenuLogin(){
+    private void mostrarMenuLogin() {
         System.out.println("--------------MENU--------------");
         System.out.println("1-. Iniciar Sesión.");
         System.out.println("2-. Registrarse.");
         System.out.println("3-. Salir");
     }
 
-    private void mostrarPuntuaciones (List<IPuntuacion> scores){
+    private void mostrarPuntuaciones(List<IPuntuacion> scores) {
         System.out.println("--------------Puntuaciones--------------");
         int i = 1;
         for (IPuntuacion puntuacion : scores) {

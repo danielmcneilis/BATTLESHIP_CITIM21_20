@@ -1,6 +1,5 @@
 package es.upm.etsisi.CITIM21_20.repositories;
 
-import es.upm.etsisi.CITIM21_20.models.Score;
 import es.upm.etsisi.CITIM21_20.models.User;
 
 import java.io.IOException;
@@ -14,7 +13,7 @@ public class UserRepository implements IUserRepository {
     private HashMap<String, User> userList;
 
     public static UserRepository getInstance() {
-        if(instance == null) {
+        if (instance == null) {
             instance = new UserRepository(new HashMap<>());
         }
         return instance;
@@ -25,15 +24,14 @@ public class UserRepository implements IUserRepository {
     }
 
     @Override
-    public User getUser(String id){
+    public User getUser(String id) {
         return userList.get(id);
     }
 
     @Override
     public User createUser(String username, String id) throws IOException {
         User user = new User(username, id);
-        if(user.isValidUserName())
-        {
+        if (user.isValidUserName()) {
             userList.put(id, user);
             return user;
         }
@@ -56,9 +54,9 @@ public class UserRepository implements IUserRepository {
         this.userList.remove(id);
     }
 
-    public ArrayList<User> valores(){
+    public ArrayList<User> valores() {
         ArrayList<User> lista = new ArrayList<>();
-        for(User user : userList.values()){
+        for (User user : userList.values()) {
             lista.add(user);
         }
         return lista;

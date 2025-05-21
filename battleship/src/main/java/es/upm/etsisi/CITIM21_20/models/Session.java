@@ -1,8 +1,6 @@
 package es.upm.etsisi.CITIM21_20.models;
 
 import lombok.Getter;
-import servidor.ObtencionDeRol;
-import servidor.UPMUsers;
 
 import java.time.LocalDateTime;
 

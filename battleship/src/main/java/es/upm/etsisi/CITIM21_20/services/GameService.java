@@ -19,7 +19,7 @@ public class GameService {
         this.controladorPartida = ControladorPartida.getInstance(scanner);
     }
 
-    public void startGame(IJugador usuariologued){
+    public void startGame(IJugador usuariologued) {
         IPuntuacion puntuacion = new Score();
         IMovimiento movimiento = new Movement();
 

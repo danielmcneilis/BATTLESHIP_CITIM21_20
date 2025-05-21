@@ -1,6 +1,5 @@
 package es.upm.etsisi.CITIM21_20.services;
 
-import es.upm.etsisi.CITIM21_20.models.Score;
 import es.upm.etsisi.CITIM21_20.models.Session;
 import es.upm.etsisi.CITIM21_20.models.User;
 import es.upm.etsisi.CITIM21_20.repositories.ISessonRepository;
@@ -9,7 +8,10 @@ import es.upm.etsisi.fis.model.IPuntuacion;
 import servidor.ExternalLDAP;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Scanner;
 
 public class UserService {
 
@@ -50,7 +52,7 @@ public class UserService {
         return createdUser;
     }
 
-    public User login(){
+    public User login() {
         String id = ExternalLDAP.LoginLDAP();
 
         if (id == null) {
@@ -69,20 +71,19 @@ public class UserService {
 
     public void logout(User user) {
         Session userSession = this.sessionList.getSession(user.getId());
-        if(userSession == null){
+        if (userSession == null) {
             System.out.println("USER NOT FOUND");
         }
-       if (userSession.logout()){
-           System.out.println("LOGOUT SUCCESSFUL");
-       }
-       else{
-           System.out.println("LOGOUT FAILED");
-       }
+        if (userSession.logout()) {
+            System.out.println("LOGOUT SUCCESSFUL");
+        } else {
+            System.out.println("LOGOUT FAILED");
+        }
     }
 
     public void deleteAccount(User user) {
         String id = ExternalLDAP.LoginLDAP();
-        if(user.getId().equals(id)){
+        if (user.getId().equals(id)) {
             this.userList.deleteUser(user.getId());
             this.sessionList.deleteSession(user.getId());
         } else {
@@ -94,7 +95,7 @@ public class UserService {
         Scanner scanner = new Scanner(System.in);
         String username;
         boolean correcto = isSure(user.getUsername());
-        if(correcto){
+        if (correcto) {
             do {
                 System.out.println("Introduce un nuevo nombre de usuario");
                 username = scanner.nextLine();
@@ -106,26 +107,26 @@ public class UserService {
         }
     }
 
-    private boolean isSure(String actualUsername){
+    private boolean isSure(String actualUsername) {
         Scanner scanner = new Scanner(System.in);
         String username;
         System.out.println("Para cambiar el nombre tienes que introducir tu nombre actual ");
         do {
             System.out.print("Introduce tu nombre de usuario actual: ");
             username = scanner.nextLine();
-        }while (!username.equals(actualUsername));
+        } while (!username.equals(actualUsername));
 
         return true;
     }
 
 
-    public List<IPuntuacion> getScore (User usuario){
+    public List<IPuntuacion> getScore(User usuario) {
         List<IPuntuacion> listapuntuaciones = new ArrayList<>();
-        if(usuario.isAdmin()){
+        if (usuario.isAdmin()) {
             System.out.println("SOY ADMIN");
             listapuntuaciones = adminScore();
 
-        } else{
+        } else {
             System.out.println("SOY ALUMNº");
             listapuntuaciones = userScore(usuario.getUsername());
 
@@ -134,11 +135,11 @@ public class UserService {
     }
 
 
-    private List<IPuntuacion> adminScore(){
+    private List<IPuntuacion> adminScore() {
         // el admin puede ver todas las puntuaciones, pero si puede ver todas, para que le paso un nombre como parametro
         List<IPuntuacion> listapuntuaciones = new ArrayList<>();
-        for(User user : userList.valores()){
-            for(IPuntuacion puntuacion : user.getPuntuaciones()){
+        for (User user : userList.valores()) {
+            for (IPuntuacion puntuacion : user.getPuntuaciones()) {
                 listapuntuaciones.add(puntuacion);
             }
         }
@@ -146,11 +147,11 @@ public class UserService {
         return listapuntuaciones;
     }
 
-    private List<IPuntuacion> userScore(String nombreusuario){ // ver las 10 mejores partidas suyas
+    private List<IPuntuacion> userScore(String nombreusuario) { // ver las 10 mejores partidas suyas
         User usuario = userList.getUserByUsername(nombreusuario); // necesito sacarlo del hashmap
         List<IPuntuacion> top10 = new ArrayList<>();
         List<IPuntuacion> nueva = CloneList(usuario.getPuntuaciones());
-        if(usuario == null) {
+        if (usuario == null) {
             System.out.println("USER NOT FOUND");
             return top10;
         }
@@ -172,19 +173,15 @@ public class UserService {
     }
 
 
-    private List<IPuntuacion> CloneList(List<IPuntuacion> original){ // para no borrar contenido de la original
+    private List<IPuntuacion> CloneList(List<IPuntuacion> original) { // para no borrar contenido de la original
         List<IPuntuacion> clone = new ArrayList<>();
         Iterator<IPuntuacion> it = original.iterator();
-        while(it.hasNext()){
+        while (it.hasNext()) {
             IPuntuacion x = it.next();
             clone.add(x);
         }
         return clone;
     }
-
-
-
-
 
 
 }
