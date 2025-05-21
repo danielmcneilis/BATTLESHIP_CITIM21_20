@@ -9,7 +9,7 @@ import es.upm.etsisi.fis.model.IPuntuacion;
 
 import java.util.Scanner;
 
-public class GameService {
+public class GameService implements IGameService{
 
     private Scanner scanner;
     private ControladorPartida controladorPartida;
@@ -19,6 +19,7 @@ public class GameService {
         this.controladorPartida = ControladorPartida.getInstance(scanner);
     }
 
+    @Override
     public void startGame(IJugador usuariologued) {
         IPuntuacion puntuacion = new Score();
         IMovimiento movimiento = new Movement();

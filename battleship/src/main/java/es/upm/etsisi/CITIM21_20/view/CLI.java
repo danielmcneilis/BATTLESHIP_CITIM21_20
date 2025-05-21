@@ -1,10 +1,10 @@
 package es.upm.etsisi.CITIM21_20.view;
 
+import es.upm.etsisi.CITIM21_20.models.Score;
 import es.upm.etsisi.CITIM21_20.models.User;
 import es.upm.etsisi.CITIM21_20.repositories.SessionRepository;
 import es.upm.etsisi.CITIM21_20.repositories.UserRepository;
-import es.upm.etsisi.CITIM21_20.services.GameService;
-import es.upm.etsisi.CITIM21_20.services.UserService;
+import es.upm.etsisi.CITIM21_20.services.*;
 import es.upm.etsisi.fis.model.IPuntuacion;
 
 import java.io.IOException;
@@ -15,8 +15,9 @@ public class CLI {
 
     private UserRepository userRepository;
     private SessionRepository sessionRepository;
-    private UserService userService;
-    private GameService gameService;
+    private IUserService userService;
+    private IGameService gameService;
+    private IScoreService scoreService;
     private static CLI instance;
 
 
@@ -32,6 +33,7 @@ public class CLI {
         this.sessionRepository = SessionRepository.getInstance();
         this.gameService = new GameService(new Scanner(System.in));
         this.userService = new UserService(userRepository, sessionRepository);
+        this.scoreService = new ScoreService(userRepository);
         this.excute();
     }
 
@@ -101,7 +103,7 @@ public class CLI {
                 break;
             case 2:
                 //mostrar puntuacion
-                List<IPuntuacion> puntuaciones = this.userService.getScore(userLoggeado);
+                List<IPuntuacion> puntuaciones = this.scoreService.getScore(userLoggeado);
                 mostrarPuntuaciones(puntuaciones);
                 menuPrincipal(userLoggeado);
                 break;

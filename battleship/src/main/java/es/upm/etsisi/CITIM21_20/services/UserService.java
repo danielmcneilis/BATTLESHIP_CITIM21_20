@@ -13,7 +13,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
-public class UserService {
+public class UserService implements  IUserService{
 
     private IUserRepository userList;
     private ISessonRepository sessionList;
@@ -24,6 +24,7 @@ public class UserService {
         this.sessionList = sessionList;
     }
 
+    @Override
     public User userRegister() throws IOException {
         String id = ExternalLDAP.LoginLDAP(); // unico para cada usuario
         Scanner scanner = new Scanner(System.in);
@@ -52,6 +53,7 @@ public class UserService {
         return createdUser;
     }
 
+    @Override
     public User login() {
         String id = ExternalLDAP.LoginLDAP();
 
@@ -69,6 +71,7 @@ public class UserService {
         return user;
     }
 
+    @Override
     public void logout(User user) {
         Session userSession = this.sessionList.getSession(user.getId());
         if (userSession == null) {
@@ -81,6 +84,7 @@ public class UserService {
         }
     }
 
+    @Override
     public void deleteAccount(User user) {
         String id = ExternalLDAP.LoginLDAP();
         if (user.getId().equals(id)) {
@@ -91,6 +95,7 @@ public class UserService {
         }
     }
 
+    @Override
     public void changeUserName(User user) throws IOException {
         Scanner scanner = new Scanner(System.in);
         String username;
@@ -118,70 +123,4 @@ public class UserService {
 
         return true;
     }
-
-
-    public List<IPuntuacion> getScore(User usuario) {
-        List<IPuntuacion> listapuntuaciones = new ArrayList<>();
-        if (usuario.isAdmin()) {
-            System.out.println("SOY ADMIN");
-            listapuntuaciones = adminScore();
-
-        } else {
-            System.out.println("SOY ALUMNº");
-            listapuntuaciones = userScore(usuario.getUsername());
-
-        }
-        return listapuntuaciones;
-    }
-
-
-    private List<IPuntuacion> adminScore() {
-        // el admin puede ver todas las puntuaciones, pero si puede ver todas, para que le paso un nombre como parametro
-        List<IPuntuacion> listapuntuaciones = new ArrayList<>();
-        for (User user : userList.valores()) {
-            for (IPuntuacion puntuacion : user.getPuntuaciones()) {
-                listapuntuaciones.add(puntuacion);
-            }
-        }
-
-        return listapuntuaciones;
-    }
-
-    private List<IPuntuacion> userScore(String nombreusuario) { // ver las 10 mejores partidas suyas
-        User usuario = userList.getUserByUsername(nombreusuario); // necesito sacarlo del hashmap
-        List<IPuntuacion> top10 = new ArrayList<>();
-        List<IPuntuacion> nueva = CloneList(usuario.getPuntuaciones());
-        if (usuario == null) {
-            System.out.println("USER NOT FOUND");
-            return top10;
-        }
-
-        while (!nueva.isEmpty() && top10.size() < 10) {
-            Iterator<IPuntuacion> it = nueva.iterator();
-            IPuntuacion max = it.next(); // asumimos que hay al menos uno
-
-            while (it.hasNext()) {
-                IPuntuacion actual = it.next();
-                if ((actual.getPuntos() > max.getPuntos()) && actual.getPuntos() != 0) {
-                    max = actual;
-                }
-            }
-            top10.add(max);
-            nueva.remove(max);
-        }
-        return top10; // el problema con esto es que que pasa si me lo devuelven vacio, tenemos que implementar manejor de excepciones?
-    }
-
-
-    private List<IPuntuacion> CloneList(List<IPuntuacion> original) { // para no borrar contenido de la original
-        List<IPuntuacion> clone = new ArrayList<>();
-        Iterator<IPuntuacion> it = original.iterator();
-        while (it.hasNext()) {
-            IPuntuacion x = it.next();
-            clone.add(x);
-        }
-        return clone;
-    }
-
-
 }
