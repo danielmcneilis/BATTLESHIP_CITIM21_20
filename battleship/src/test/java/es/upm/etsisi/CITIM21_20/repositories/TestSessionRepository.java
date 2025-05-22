@@ -6,10 +6,18 @@ import es.upm.etsisi.CITIM21_20.models.User;
 import java.util.ArrayList;
 
 public class TestSessionRepository implements ISessonRepository{
+    private static TestSessionRepository instance;
     ArrayList<Session> sessions;
 
-    public TestSessionRepository(){
+    private TestSessionRepository(){
         this.sessions = new ArrayList<>();
+    }
+
+    public static TestSessionRepository getInstance(){
+        if(instance == null){
+            instance = new TestSessionRepository();
+        }
+        return instance;
     }
 
     @Override
@@ -37,5 +45,9 @@ public class TestSessionRepository implements ISessonRepository{
             }
         }
         return false;
+    }
+
+    public void reset(){
+        sessions.clear();
     }
 }
