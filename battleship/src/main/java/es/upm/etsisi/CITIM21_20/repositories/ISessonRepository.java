@@ -7,7 +7,7 @@ public interface ISessonRepository {
 
     Session getSession(String id);
 
-    void createSession(User user, String email);
+    void createSession(User user, String id);
 
     boolean deleteSession(String id);
 }
