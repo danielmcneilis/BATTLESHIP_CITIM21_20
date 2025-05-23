@@ -8,6 +8,7 @@ import es.upm.etsisi.CITIM21_20.repositories.SessionRepository;
 import es.upm.etsisi.CITIM21_20.repositories.UserRepository;
 import es.upm.etsisi.CITIM21_20.services.*;
 import es.upm.etsisi.fis.model.IPuntuacion;
+import servidor.ExternalLDAP;
 import utilidades.Cifrado;
 
 import java.io.IOException;
@@ -65,21 +66,28 @@ public class CLI {
     }
 
     public boolean menuLogin() throws IOException {
+        String id;
+        Scanner scanner = new Scanner(System.in);
         int option;
         User userLoggeado = null;
         do {
             mostrarMenuLogin();
-            Scanner scanner = new Scanner(System.in);
             option = scanner.nextInt();
         } while (option < 1 || option > 3);
 
         switch (option) {
             case 1:
-                userLoggeado = this.userService.login();
+                id = ExternalLDAP.LoginLDAP();
+                userLoggeado = this.userService.login(id);
                 menuPrincipal(userLoggeado);
                 return false;
             case 2:
-                userLoggeado = this.userService.userRegister();
+                id = ExternalLDAP.LoginLDAP();
+                System.out.println("Introduce un nombre de usuario");
+                scanner.nextLine();
+                String username = scanner.nextLine();
+                userLoggeado = this.userService.userRegister(id, username);
+
                 // TODO: se puede pasar como parámetro el usuario o aumenta el acoplamiento?
                 menuPrincipal(userLoggeado);
                 return false;
@@ -93,9 +101,10 @@ public class CLI {
 
     private void menuPrincipal(User userLoggeado) throws IOException {
         int option;
+        String id;
+        Scanner scanner = new Scanner(System.in);
         do {
             mostrarMenuPrincipal();
-            Scanner scanner = new Scanner(System.in);
             option = scanner.nextInt();
         } while (option < 1 || option > 5);
 
@@ -113,17 +122,23 @@ public class CLI {
                 break;
             case 3:
                 // TODO Cambiar Nombre Usuario
-                userService.changeUserName(userLoggeado);
+                System.out.println("Introduce tu nombre actual: ");
+                scanner.nextLine();
+                String actualUsername = scanner.nextLine();
+                System.out.println("Introduce tu nombre nuevo: ");
+                String newUsername = scanner.nextLine();
+                userService.changeUserName(userLoggeado, actualUsername, newUsername);
                 menuPrincipal(userLoggeado);
                 break;
             case 4:
                 // cerrar sesion
-                userService.logout(userLoggeado);
+                userService.logout(userLoggeado.getId());
+                System.out.println("LOGOUT SUCCESSFUL");
                 menuLogin();
                 break;
             case 5:
-                userService.logout(userLoggeado);
-                userService.deleteAccount(userLoggeado);
+                userService.logout(userLoggeado.getId());
+                userService.deleteAccount(userLoggeado.getId());
                 System.out.println("Usuario borrado");
                 menuLogin();
                 break;

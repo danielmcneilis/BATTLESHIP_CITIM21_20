@@ -8,6 +8,8 @@ import es.upm.etsisi.fis.model.IPuntuacion;
 import servidor.ExternalLDAP;
 
 import java.io.IOException;
+import java.rmi.RemoteException;
+import java.rmi.server.ExportException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -25,10 +27,7 @@ public class UserService implements  IUserService{
     }
 
     @Override
-    public User userRegister() throws IOException {
-        String id = ExternalLDAP.LoginLDAP(); // unico para cada usuario
-        Scanner scanner = new Scanner(System.in);
-        String username;
+    public User userRegister(String id, String username) throws IOException {
         User createdUser;
 
         if (id == null) {
@@ -38,14 +37,14 @@ public class UserService implements  IUserService{
             throw new RuntimeException("USER ALREADY REGISTERED");
         }
 
-        do {
-            System.out.println("Introduce un nombre de usuario");
-            username = scanner.nextLine();
-            if (userList.getUserByUsername(username) != null) {
-                System.out.println("USERNAME ALREADY EXISTS, TRY ANOTHER ONE :) ");
-            }
-            createdUser = userList.createUser(username, id);
-        } while (createdUser == null);
+        if (userList.getUserByUsername(username) != null) {
+            throw new RuntimeException("USERNAME ALREADY EXISTS, TRY ANOTHER ONE :) ");
+        }
+
+        createdUser = userList.createUser(username, id);
+        if(createdUser == null){
+            throw new RuntimeException("USER NOT VALID");
+        }
 
         sessionList.createSession(createdUser, id);
         createdUser.setAdmin(false);
@@ -53,9 +52,7 @@ public class UserService implements  IUserService{
     }
 
     @Override
-    public User login() {
-        String id = ExternalLDAP.LoginLDAP();
-
+    public User login(String id) {
         if (id == null) {
             throw new RuntimeException("ERROR IN LDAP LOGIN");
         }
@@ -71,57 +68,48 @@ public class UserService implements  IUserService{
     }
 
     @Override
-    public void logout(User user) {
-        Session userSession = this.sessionList.getSession(user.getId());
+    public void logout(String id) {
+        Session userSession = this.sessionList.getSession(id);
         if (userSession == null) {
-            System.out.println("USER NOT FOUND");
+            throw new RuntimeException("USER NOT FOUND");
         }
         else {
-            if (userSession.logout()) {
-                System.out.println("LOGOUT SUCCESSFUL");
-            } else {
-                System.out.println("LOGOUT FAILED");
+            if (!userSession.logout()) {
+                throw new RuntimeException("LOGOUT FAILED");
             }
         }
     }
 
     @Override
-    public void deleteAccount(User user) {
+    public void deleteAccount(String id_user) {
         String id = ExternalLDAP.LoginLDAP();
-        if (user.getId().equals(id)) {
-            this.userList.deleteUser(user.getId());
-            this.sessionList.deleteSession(user.getId());
+        if (id_user.equals(id)) {
+            this.userList.deleteUser(id_user);
+            this.sessionList.deleteSession(id_user);
         } else {
             throw new RuntimeException("ERROR LOGIN LDAP");
         }
     }
 
     @Override
-    public void changeUserName(User user) throws IOException {
-        Scanner scanner = new Scanner(System.in);
-        String username;
-        boolean correcto = isSure(user.getUsername());
-        if (correcto) {
-            do {
-                System.out.println("Introduce un nuevo nombre de usuario");
-                username = scanner.nextLine();
-                if (userList.getUserByUsername(username) != null) {
-                    System.out.println("CHANGE NAME NOT POSIBLE");
-                }
-                user.setUsername(username);
-            } while (!user.isValidUserName());
+    public void changeUserName(User user,String actualUsername, String newUsername) throws IOException {
+
+        if(!isSure(user, actualUsername)) {
+            throw new RuntimeException("IS NOT YOUR ACTUAL USERNAME");
+        }
+
+        if (userList.getUserByUsername(newUsername) != null) {
+            System.out.println("CHANGE NAME NOT POSIBLE");
+        }
+
+        user.setUsername(newUsername);
+        if(!user.isValidUserName()){
+            user.setUsername(actualUsername);
+            throw new RuntimeException("INVALID USERNAME");
         }
     }
 
-    private boolean isSure(String actualUsername) {
-        Scanner scanner = new Scanner(System.in);
-        String username;
-        System.out.println("Para cambiar el nombre tienes que introducir tu nombre actual ");
-        do {
-            System.out.print("Introduce tu nombre de usuario actual: ");
-            username = scanner.nextLine();
-        } while (!username.equals(actualUsername));
-
-        return true;
+    private boolean isSure(User user, String actualUsername) {
+        return  user.getUsername().equals(actualUsername);
     }
 }
