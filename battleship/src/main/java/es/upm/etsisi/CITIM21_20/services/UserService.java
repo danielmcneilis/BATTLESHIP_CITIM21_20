@@ -76,10 +76,12 @@ public class UserService implements  IUserService{
         if (userSession == null) {
             System.out.println("USER NOT FOUND");
         }
-        if (userSession.logout()) {
-            System.out.println("LOGOUT SUCCESSFUL");
-        } else {
-            System.out.println("LOGOUT FAILED");
+        else {
+            if (userSession.logout()) {
+                System.out.println("LOGOUT SUCCESSFUL");
+            } else {
+                System.out.println("LOGOUT FAILED");
+            }
         }
     }
 
