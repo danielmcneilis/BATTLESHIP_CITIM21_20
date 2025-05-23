@@ -11,11 +11,9 @@ import java.util.Scanner;
 
 public class GameService implements IGameService{
 
-    private Scanner scanner;
     private ControladorPartida controladorPartida;
 
     public GameService(Scanner scanner) {
-        this.scanner = scanner;
         this.controladorPartida = ControladorPartida.getInstance(scanner);
     }
 

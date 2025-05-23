@@ -29,14 +29,14 @@ public class User implements IJugador {
 
 
     public User(String username, String id) throws IOException {
-        if (!this.isValidUserName()) {
-            throw new RuntimeException("INVALID USERNAME");
-        }
         this.username = username;
         this.id = id;
         this.score = new ArrayList<IPuntuacion>();
         this.attackList = new ArrayList<IMovimiento>();
         this.isAdmin = false;
+        if (!this.isValidUserName()) {
+            throw new RuntimeException("INVALID USERNAME");
+        }
     }
 
     public boolean isValidUserName() throws IOException {

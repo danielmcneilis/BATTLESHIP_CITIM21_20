@@ -8,6 +8,7 @@ import es.upm.etsisi.CITIM21_20.repositories.SessionRepository;
 import es.upm.etsisi.CITIM21_20.repositories.UserRepository;
 import es.upm.etsisi.CITIM21_20.services.*;
 import es.upm.etsisi.fis.model.IPuntuacion;
+import utilidades.Cifrado;
 
 import java.io.IOException;
 import java.util.List;
@@ -23,23 +24,24 @@ public class CLI {
     private static CLI instance;
 
 
-    public static CLI getInstance() {
+    public static CLI getInstance() throws IOException {
         if (instance == null) {
             instance = new CLI();
         }
         return instance;
     }
 
-    private CLI() {
+    private CLI() throws IOException {
         this.userRepository = UserRepository.getInstance();
         this.sessionRepository = SessionRepository.getInstance();
+        userRepository.createUser("kike", Cifrado.cifrar("pdi@upm.es"));
         this.gameService = new GameService(new Scanner(System.in));
         this.userService = new UserService(userRepository, sessionRepository);
         this.scoreService = new ScoreService(userRepository);
         this.excute();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         CLI.getInstance();
     }
 
