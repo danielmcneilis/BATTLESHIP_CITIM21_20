@@ -27,6 +27,10 @@ public class User implements IJugador {
     private List<IPuntuacion> score;
     private List<IMovimiento> attackList;
 
+    public User (){
+        this.score = new ArrayList<IPuntuacion>();
+        this.attackList = new ArrayList<IMovimiento>();
+    }
 
     public User(String username, String id) throws IOException {
         this.username = username;

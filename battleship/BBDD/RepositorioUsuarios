@@ -1,0 +1,20 @@
+{
+  "d11213397ca663b95fee8c02ec2edfa0" : {
+    "username" : "alvaro",
+    "id" : "d11213397ca663b95fee8c02ec2edfa0",
+    "validUserName" : true,
+    "movimientos" : [ ],
+    "nombre" : "alvaro",
+    "puntuaciones" : [ ],
+    "admin" : false
+  },
+  "cb91b5aca2bdc1b843fd980f64b32b2b" : {
+    "username" : "kike",
+    "id" : "cb91b5aca2bdc1b843fd980f64b32b2b",
+    "validUserName" : true,
+    "movimientos" : [ ],
+    "nombre" : "kike",
+    "puntuaciones" : [ ],
+    "admin" : false
+  }
+}

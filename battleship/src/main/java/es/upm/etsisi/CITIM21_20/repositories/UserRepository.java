@@ -1,8 +1,14 @@
 package es.upm.etsisi.CITIM21_20.repositories;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.module.SimpleModule;
+import es.upm.etsisi.CITIM21_20.models.Movement;
+import es.upm.etsisi.CITIM21_20.models.Score;
 import es.upm.etsisi.CITIM21_20.models.User;
+import es.upm.etsisi.fis.model.IMovimiento;
+import es.upm.etsisi.fis.model.IPuntuacion;
 
 import java.io.File;
 import java.io.IOException;
@@ -26,7 +32,7 @@ public class UserRepository implements IUserRepository {
     }
 
     private UserRepository() {
-        this.mapper = new ObjectMapper();
+        this.mapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         inicializarFichero();
         loadUsers();
     }
