@@ -1,0 +1,25 @@
+[ {
+  "user" : {
+    "username" : "alvaro",
+    "id" : "d11213397ca663b95fee8c02ec2edfa0",
+    "puntuaciones" : [ ],
+    "validUserName" : true,
+    "nombre" : "alvaro",
+    "movimientos" : [ ],
+    "admin" : false
+  },
+  "active" : false,
+  "id" : "d11213397ca663b95fee8c02ec2edfa0"
+}, {
+  "user" : {
+    "username" : "daniel",
+    "id" : "eae8b4abebb09a0b614642b890a02518",
+    "puntuaciones" : [ ],
+    "validUserName" : true,
+    "nombre" : "daniel",
+    "movimientos" : [ ],
+    "admin" : false
+  },
+  "active" : true,
+  "id" : "eae8b4abebb09a0b614642b890a02518"
+} ]

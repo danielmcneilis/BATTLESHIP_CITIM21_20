@@ -78,6 +78,7 @@ public class UserRepository implements IUserRepository {
         return lista;
 
     }
+
     private void inicializarFichero (){
         try {
             File file = new File(rute);
@@ -92,6 +93,8 @@ public class UserRepository implements IUserRepository {
             throw new RuntimeException ("CANT CREATE FILE", e);
         }
     }
+
+
 
     public void saveUsers(){
         try{
