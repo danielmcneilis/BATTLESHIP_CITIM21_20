@@ -1,29 +1,125 @@
 {
-  "d11213397ca663b95fee8c02ec2edfa0" : {
-    "username" : "alvaro",
-    "id" : "d11213397ca663b95fee8c02ec2edfa0",
-    "nombre" : "alvaro",
-    "movimientos" : [ ],
-    "puntuaciones" : [ ],
-    "validUserName" : true,
-    "admin" : false
-  },
+  "@class" : "java.util.HashMap",
   "cb91b5aca2bdc1b843fd980f64b32b2b" : {
+    "@class" : "es.upm.etsisi.CITIM21_20.models.User",
     "username" : "kike",
     "id" : "cb91b5aca2bdc1b843fd980f64b32b2b",
     "nombre" : "kike",
-    "movimientos" : [ ],
-    "puntuaciones" : [ ],
     "validUserName" : true,
+    "puntuaciones" : [ "java.util.ArrayList", [ ] ],
+    "movimientos" : [ "java.util.ArrayList", [ ] ],
     "admin" : false
   },
   "eae8b4abebb09a0b614642b890a02518" : {
-    "username" : "daniel",
+    "@class" : "es.upm.etsisi.CITIM21_20.models.User",
+    "username" : "manolo",
     "id" : "eae8b4abebb09a0b614642b890a02518",
-    "nombre" : "daniel",
-    "movimientos" : [ ],
-    "puntuaciones" : [],
+    "nombre" : "manolo",
     "validUserName" : true,
+    "puntuaciones" : [ "java.util.ArrayList", [ {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Score",
+      "partidaAsociada" : 36103090210800,
+      "puntos" : 0
+    } ] ],
+    "movimientos" : [ "java.util.ArrayList", [ {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    } ] ],
     "admin" : false
   }
 }

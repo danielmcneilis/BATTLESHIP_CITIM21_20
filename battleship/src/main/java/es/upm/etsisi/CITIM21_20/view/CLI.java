@@ -85,7 +85,6 @@ public class CLI {
                 id = ExternalLDAP.LoginLDAP();
                 System.out.println("Introduce un nombre de usuario");
                 String username = scanner.nextLine();
-                scanner.nextLine();
                 userLoggeado = this.userService.userRegister(id, username);
 
                 // TODO: se puede pasar como parámetro el usuario o aumenta el acoplamiento?

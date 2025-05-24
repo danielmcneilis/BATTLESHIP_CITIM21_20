@@ -1,6 +1,9 @@
 package es.upm.etsisi.CITIM21_20.models;
 
 import es.upm.etsisi.fis.model.IMovimiento;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
+@JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "@class")
 
 public class Movement implements IMovimiento {
 

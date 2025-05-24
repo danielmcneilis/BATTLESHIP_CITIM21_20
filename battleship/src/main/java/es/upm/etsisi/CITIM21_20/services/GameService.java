@@ -28,27 +28,12 @@ public class GameService implements IGameService{
         IPuntuacion punto = new Score();
         IMovimiento movimiento = new Movement();
 
-        puntuacion.setPuntuacion(15);
-        usuariologued.addPuntuacion(puntuacion);
-        punto.setPuntuacion(20);
-        usuariologued.addPuntuacion(punto);
-        userList.saveUsers();
-        /*
+
+
         controladorPartida.crearPartida(usuariologued, puntuacion, movimiento);
-        List<IPuntuacion> lista = usuariologued.getPuntuaciones();
-        for(IPuntuacion score : lista){
-            System.out.println(score.getPuntos());
-        } // esto me esta mostrando bien la puntuacion
 
         this.userList.saveUsers();
-        userList.getUserByUsername(usuariologued.getNombre());
-        System.out.println("despues de meter fichero");
 
-         */
-        List<IPuntuacion> listation = usuariologued.getPuntuaciones();
-        for(IPuntuacion score : listation){
-            System.out.println(score.getPuntos());
-        } // esto me esta mostrando bien la puntuacion
     }
 
 }

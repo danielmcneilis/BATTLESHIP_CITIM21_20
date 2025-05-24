@@ -1,5 +1,7 @@
 package es.upm.etsisi.CITIM21_20.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
 import es.upm.etsisi.fis.model.IJugador;
 import es.upm.etsisi.fis.model.IMovimiento;
 import es.upm.etsisi.fis.model.IPuntuacion;
@@ -13,6 +15,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
 
 public class User implements IJugador {
 
@@ -24,7 +28,19 @@ public class User implements IJugador {
     @Getter
     @Setter
     private boolean isAdmin;
+    @JsonProperty("puntuaciones")
+    @Setter
     private List<IPuntuacion> score;
+    @JsonProperty("movimientos")
+    @JsonTypeInfo(
+            use = JsonTypeInfo.Id.CLASS,
+            include = JsonTypeInfo.As.PROPERTY,
+            property = "@class"
+    )
+    @JsonSubTypes({
+            @JsonSubTypes.Type(value = Movement.class, name = "es.upm.etsisi.CITIM21_20.models.Movement")
+    })
+    @Setter
     private List<IMovimiento> attackList;
 
     public User (){
