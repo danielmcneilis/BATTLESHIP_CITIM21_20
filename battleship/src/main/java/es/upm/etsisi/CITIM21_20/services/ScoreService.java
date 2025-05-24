@@ -19,11 +19,9 @@ public class ScoreService implements IScoreService{
     public List<IPuntuacion> getScore(User usuario) {
         List<IPuntuacion> listapuntuaciones = new ArrayList<>();
         if (usuario.isAdmin()) {
-            System.out.println("SOY ADMIN");
             listapuntuaciones = adminScore();
 
         } else {
-            System.out.println("SOY ALUMNº");
             listapuntuaciones = userScore(usuario.getUsername());
 
         }

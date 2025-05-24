@@ -21,5 +21,7 @@ public interface IUserRepository {
 
         void saveUsers();
 
+        void loadUsers ();
+
 }
 

@@ -76,10 +76,10 @@ public class User implements IJugador {
         do {
             fila = scanner.nextInt();
             columna = scanner.nextInt();
-            if (fila < 0 || fila > 9 || columna < 0 || columna > 9) {
+            if (fila < 0 || fila > chars.length || columna < 0 || columna > chars[0].length) {
                 System.out.println("INVALID POSITION");
             }
-        } while (fila < 0 || fila > 9 || columna < 0 || columna > 9);
+        } while (fila < 0 || fila > chars.length || columna < 0 || columna > chars[0].length);
         int[] posicion = {fila, columna};
         return posicion;
     }

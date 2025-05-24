@@ -98,6 +98,7 @@ public class UserRepository implements IUserRepository {
 
     public void saveUsers(){
         try{
+            // porque aqui eres null
             mapper.writerWithDefaultPrettyPrinter().writeValue(new File(rute), this.userList);
 
         }catch (IOException e){
@@ -106,7 +107,7 @@ public class UserRepository implements IUserRepository {
     }
 
     // carga a tu atributo userlist
-    private void loadUsers (){
+    public void loadUsers (){
         try{
             File file = new File(rute);
             TypeReference<HashMap<String, User>> typeref = new TypeReference<HashMap<String, User>>() {};
