@@ -98,7 +98,6 @@ public class UserRepository implements IUserRepository {
 
     public void saveUsers(){
         try{
-            // porque aqui eres null
             mapper.writerWithDefaultPrettyPrinter().writeValue(new File(rute), this.userList);
 
         }catch (IOException e){
