@@ -107,6 +107,7 @@ public class UserService implements  IUserService{
             user.setUsername(actualUsername);
             throw new RuntimeException("INVALID USERNAME");
         }
+        userList.saveUsers();
     }
 
     private boolean isSure(User user, String actualUsername) {

@@ -62,6 +62,11 @@ public class TestUserRepository implements IUserRepository{
         return lista;
     }
 
+    @Override
+    public void saveUsers() {
+
+    }
+
     public void reset(){
         userList.clear();
     }

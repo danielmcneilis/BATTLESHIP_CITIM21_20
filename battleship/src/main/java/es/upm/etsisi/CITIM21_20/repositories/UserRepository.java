@@ -41,7 +41,7 @@ public class UserRepository implements IUserRepository {
         User user = new User(username, id);
         if (user.isValidUserName()) {
             userList.put(id, user);
-            saveUsers(userList);
+            saveUsers();
             return user;
         }
         return null;
@@ -61,7 +61,7 @@ public class UserRepository implements IUserRepository {
     @Override
     public void deleteUser(String id) {
         this.userList.remove(id);
-        saveUsers(userList);
+        saveUsers();
     }
 
     public ArrayList<User> valores() {
@@ -87,15 +87,16 @@ public class UserRepository implements IUserRepository {
         }
     }
 
-    private void saveUsers(HashMap <String, User> mapa){
+    public void saveUsers(){
         try{
-            mapper.writerWithDefaultPrettyPrinter().writeValue(new File(rute), mapa);
+            mapper.writerWithDefaultPrettyPrinter().writeValue(new File(rute), this.userList);
 
         }catch (IOException e){
             throw new RuntimeException("CANT SAVE ON FILE");
         }
     }
 
+    // carga a tu atributo userlist
     private void loadUsers (){
         try{
             File file = new File(rute);

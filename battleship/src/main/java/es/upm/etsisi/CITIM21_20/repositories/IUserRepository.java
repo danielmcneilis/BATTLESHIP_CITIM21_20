@@ -4,7 +4,6 @@ import es.upm.etsisi.CITIM21_20.models.User;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public interface IUserRepository {
 
@@ -20,6 +19,7 @@ public interface IUserRepository {
 
         ArrayList<User> valores();
 
+        void saveUsers();
 
 }
 
