@@ -2,28 +2,28 @@
   "d11213397ca663b95fee8c02ec2edfa0" : {
     "username" : "alvaro",
     "id" : "d11213397ca663b95fee8c02ec2edfa0",
-    "validUserName" : true,
     "nombre" : "alvaro",
-    "puntuaciones" : [ ],
     "movimientos" : [ ],
+    "puntuaciones" : [ ],
+    "validUserName" : true,
     "admin" : false
   },
   "cb91b5aca2bdc1b843fd980f64b32b2b" : {
     "username" : "kike",
     "id" : "cb91b5aca2bdc1b843fd980f64b32b2b",
-    "validUserName" : true,
     "nombre" : "kike",
-    "puntuaciones" : [ ],
     "movimientos" : [ ],
+    "puntuaciones" : [ ],
+    "validUserName" : true,
     "admin" : false
   },
   "eae8b4abebb09a0b614642b890a02518" : {
     "username" : "daniel",
     "id" : "eae8b4abebb09a0b614642b890a02518",
-    "validUserName" : true,
     "nombre" : "daniel",
-    "puntuaciones" : [ ],
     "movimientos" : [ ],
+    "puntuaciones" : [],
+    "validUserName" : true,
     "admin" : false
   }
 }

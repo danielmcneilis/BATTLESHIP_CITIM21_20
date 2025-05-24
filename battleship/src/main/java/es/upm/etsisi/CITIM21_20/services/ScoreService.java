@@ -1,5 +1,6 @@
 package es.upm.etsisi.CITIM21_20.services;
 
+import es.upm.etsisi.CITIM21_20.models.Score;
 import es.upm.etsisi.CITIM21_20.models.User;
 import es.upm.etsisi.CITIM21_20.repositories.IUserRepository;
 import es.upm.etsisi.fis.model.IPuntuacion;
