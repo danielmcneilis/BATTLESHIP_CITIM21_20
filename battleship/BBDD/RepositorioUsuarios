@@ -5,9 +5,9 @@
     "username" : "kike",
     "id" : "cb91b5aca2bdc1b843fd980f64b32b2b",
     "nombre" : "kike",
-    "validUserName" : true,
-    "puntuaciones" : [ "java.util.ArrayList", [ ] ],
     "movimientos" : [ "java.util.ArrayList", [ ] ],
+    "puntuaciones" : [ "java.util.ArrayList", [ ] ],
+    "validUserName" : true,
     "admin" : false
   },
   "eae8b4abebb09a0b614642b890a02518" : {
@@ -15,12 +15,6 @@
     "username" : "manolo",
     "id" : "eae8b4abebb09a0b614642b890a02518",
     "nombre" : "manolo",
-    "validUserName" : true,
-    "puntuaciones" : [ "java.util.ArrayList", [ {
-      "@class" : "es.upm.etsisi.CITIM21_20.models.Score",
-      "partidaAsociada" : 36103090210800,
-      "puntos" : 0
-    } ] ],
     "movimientos" : [ "java.util.ArrayList", [ {
       "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
     }, {
@@ -120,6 +114,12 @@
     }, {
       "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
     } ] ],
+    "puntuaciones" : [ "java.util.ArrayList", [ {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Score",
+      "partidaAsociada" : 36103090210800,
+      "puntos" : 0
+    } ] ],
+    "validUserName" : true,
     "admin" : false
   }
 }

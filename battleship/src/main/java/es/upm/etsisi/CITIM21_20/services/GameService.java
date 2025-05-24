@@ -25,7 +25,6 @@ public class GameService implements IGameService{
     @Override
     public void startGame(IJugador usuariologued) {
         IPuntuacion puntuacion = new Score();
-        IPuntuacion punto = new Score();
         IMovimiento movimiento = new Movement();
 
 
