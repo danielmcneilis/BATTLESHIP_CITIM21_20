@@ -74,7 +74,7 @@ public class CLI {
             mostrarMenuLogin();
             option = scanner.nextInt();
         } while (option < 1 || option > 3);
-
+        scanner.nextLine(); // limpieza de buffer
         switch (option) {
             case 1:
                 id = ExternalLDAP.LoginLDAP();
@@ -84,8 +84,8 @@ public class CLI {
             case 2:
                 id = ExternalLDAP.LoginLDAP();
                 System.out.println("Introduce un nombre de usuario");
-                scanner.nextLine();
                 String username = scanner.nextLine();
+                scanner.nextLine();
                 userLoggeado = this.userService.userRegister(id, username);
 
                 // TODO: se puede pasar como parámetro el usuario o aumenta el acoplamiento?
@@ -107,40 +107,44 @@ public class CLI {
             mostrarMenuPrincipal();
             option = scanner.nextInt();
         } while (option < 1 || option > 5);
-
+        scanner.nextLine(); // limpieza de buffer
         switch (option) {
             case 1:
                 // empezar partida
                 this.gameService.startGame(userLoggeado);
                 menuPrincipal(userLoggeado);
+                userRepository.saveUsers();
                 break;
             case 2:
                 //mostrar puntuacion
                 List<IPuntuacion> puntuaciones = this.scoreService.getScore(userLoggeado);
                 mostrarPuntuaciones(puntuaciones);
                 menuPrincipal(userLoggeado);
+                userRepository.saveUsers();
                 break;
             case 3:
                 // TODO Cambiar Nombre Usuario
+
+                String actualUsername;
                 System.out.println("Introduce tu nombre actual: ");
-                scanner.nextLine();
-                String actualUsername = scanner.nextLine();
+                actualUsername = scanner.nextLine();
                 System.out.println("Introduce tu nombre nuevo: ");
                 String newUsername = scanner.nextLine();
                 userService.changeUserName(userLoggeado, actualUsername, newUsername);
                 menuPrincipal(userLoggeado);
+                userRepository.saveUsers();
                 break;
             case 4:
                 // cerrar sesion
                 userService.logout(userLoggeado.getId());
                 System.out.println("LOGOUT SUCCESSFUL");
-                menuLogin();
+                userRepository.saveUsers();
                 break;
             case 5:
                 userService.logout(userLoggeado.getId());
                 userService.deleteAccount(userLoggeado.getId());
                 System.out.println("Usuario borrado");
-                menuLogin();
+                userRepository.saveUsers();
                 break;
             default:
                 System.out.println("ERROR");
