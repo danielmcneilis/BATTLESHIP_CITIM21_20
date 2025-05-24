@@ -7,13 +7,25 @@ import java.util.ArrayList;
 
 public interface IUserRepository {
 
-    User getUser(String id);
 
-    User getUserByUsername(String username);
+        @Override
+        User getUser(String id);
 
-    User createUser(String username, String id) throws IOException;
+        @Override
+        User createUser(String username, String id) throws IOException ;
 
-    void deleteUser(String id);
+        @Override
+        User getUserByUsername(String username);
 
-    ArrayList<User> valores();
+        @Override
+        void deleteUser(String id);
+
+        ArrayList<User> valores();
+
+        void inicializarFichero ();
+
+        void saveUsers(HashMap <String, User> mapa);
+
+        void loadUsers ();
 }
+
