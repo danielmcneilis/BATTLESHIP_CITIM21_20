@@ -1,5 +1,6 @@
 package es.upm.etsisi.CITIM21_20.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import es.upm.etsisi.fis.model.IJugador;
@@ -29,6 +30,14 @@ public class User implements IJugador {
     @Setter
     private boolean isAdmin;
     @JsonProperty("puntuaciones")
+    @JsonTypeInfo(
+            use = JsonTypeInfo.Id.CLASS,
+            include = JsonTypeInfo.As.PROPERTY,
+            property = "@class"
+    )
+    @JsonSubTypes({
+            @JsonSubTypes.Type(value = Score.class, name = "es.upm.etsisi.CITIM21_20.models.Score")
+    })
     @Setter
     private List<IPuntuacion> score;
     @JsonProperty("movimientos")
@@ -106,6 +115,7 @@ public class User implements IJugador {
     }
 
     @Override
+    @JsonIgnore
     public String getNombre() {
         return this.username;
     }

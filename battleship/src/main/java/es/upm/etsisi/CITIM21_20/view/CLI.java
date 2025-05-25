@@ -35,7 +35,6 @@ public class CLI {
     private CLI() throws IOException {
         this.userRepository = UserRepository.getInstance();
         this.sessionRepository = SessionRepository.getInstance();
-        userRepository.createUser("kike", Cifrado.cifrar("pdi@upm.es"));
         this.gameService = new GameService(new Scanner(System.in));
         this.userService = new UserService(userRepository, sessionRepository);
         this.scoreService = new ScoreService(userRepository);

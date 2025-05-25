@@ -1,21 +1,39 @@
 {
   "@class" : "java.util.HashMap",
-  "cb91b5aca2bdc1b843fd980f64b32b2b" : {
-    "@class" : "es.upm.etsisi.CITIM21_20.models.User",
-    "username" : "kike",
-    "id" : "cb91b5aca2bdc1b843fd980f64b32b2b",
-    "nombre" : "kike",
-    "movimientos" : [ "java.util.ArrayList", [ ] ],
-    "puntuaciones" : [ "java.util.ArrayList", [ ] ],
-    "validUserName" : true,
-    "admin" : false
-  },
   "eae8b4abebb09a0b614642b890a02518" : {
     "@class" : "es.upm.etsisi.CITIM21_20.models.User",
-    "username" : "manolo",
+    "username" : "daniel",
     "id" : "eae8b4abebb09a0b614642b890a02518",
-    "nombre" : "manolo",
+    "validUserName" : true,
     "movimientos" : [ "java.util.ArrayList", [ {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
       "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
     }, {
       "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
@@ -116,10 +134,9 @@
     } ] ],
     "puntuaciones" : [ "java.util.ArrayList", [ {
       "@class" : "es.upm.etsisi.CITIM21_20.models.Score",
-      "partidaAsociada" : 36103090210800,
-      "puntos" : 0
+      "partidaAsociada" : 81050774943800,
+      "puntos" : 9
     } ] ],
-    "validUserName" : true,
     "admin" : false
   }
 }

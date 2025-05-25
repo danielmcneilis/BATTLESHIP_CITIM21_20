@@ -35,6 +35,7 @@ public class UserRepository implements IUserRepository {
 
     private UserRepository() {
         this.mapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false).activateDefaultTyping(LaissezFaireSubTypeValidator.instance, ObjectMapper.DefaultTyping.NON_FINAL, JsonTypeInfo.As.PROPERTY);
+        this.mapper.addMixIn(IPuntuacion.class, Score.class);
         inicializarFichero();
         loadUsers();
     }

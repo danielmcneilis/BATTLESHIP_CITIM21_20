@@ -1,15 +1,17 @@
 package es.upm.etsisi.CITIM21_20.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
 import es.upm.etsisi.fis.model.IPuntuacion;
 import lombok.Getter;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-
-@JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "@class")
+import lombok.Setter;
 
 
 public class Score implements IPuntuacion {
-
     private long score;
+    @Setter
     @Getter
     private long partidaAsociada;
 
@@ -18,7 +20,9 @@ public class Score implements IPuntuacion {
         this.score = 0L;
     }
 
+
     @Override
+    @JsonProperty("puntos")
     public long getPuntos() {
         return this.score;
     }
@@ -32,6 +36,7 @@ public class Score implements IPuntuacion {
     }
 
     @Override
+    @JsonProperty("puntos")
     public void setPuntuacion(long l) {
         this.score = l;
     }

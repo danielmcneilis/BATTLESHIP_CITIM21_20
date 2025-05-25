@@ -2,12 +2,9 @@
   "user" : {
     "username" : "daniel",
     "id" : "eae8b4abebb09a0b614642b890a02518",
-    "score" : [ ],
-    "attackList" : [ ],
-    "nombre" : "daniel",
+    "validUserName" : true,
     "movimientos" : [ ],
     "puntuaciones" : [ ],
-    "validUserName" : true,
     "admin" : false
   },
   "active" : true,
