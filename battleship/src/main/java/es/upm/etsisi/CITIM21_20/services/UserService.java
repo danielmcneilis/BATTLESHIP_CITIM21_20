@@ -94,7 +94,7 @@ public class UserService implements IUserService {
         }
 
         if (userList.getUserByUsername(newUsername) != null) {
-            System.out.println("CHANGE NAME NOT POSIBLE");
+            throw new RuntimeException("CHANGE NAME NOT POSIBLE");
         }
 
         user.setUsername(newUsername);
