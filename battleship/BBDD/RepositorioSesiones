@@ -3,10 +3,32 @@
     "username" : "daniel",
     "id" : "eae8b4abebb09a0b614642b890a02518",
     "validUserName" : true,
-    "movimientos" : [ ],
     "puntuaciones" : [ ],
+    "movimientos" : [ ],
+    "admin" : false
+  },
+  "active" : false,
+  "id" : "eae8b4abebb09a0b614642b890a02518"
+}, {
+  "user" : {
+    "username" : "Carlos",
+    "id" : "ff56c2f78d087919fd86cddafd373b35",
+    "validUserName" : true,
+    "puntuaciones" : [ ],
+    "movimientos" : [ ],
+    "admin" : false
+  },
+  "active" : false,
+  "id" : "ff56c2f78d087919fd86cddafd373b35"
+}, {
+  "user" : {
+    "username" : "pepe",
+    "id" : "32cd554f670a2386aaecce69bafecb47",
+    "validUserName" : true,
+    "puntuaciones" : [ ],
+    "movimientos" : [ ],
     "admin" : false
   },
   "active" : true,
-  "id" : "eae8b4abebb09a0b614642b890a02518"
+  "id" : "32cd554f670a2386aaecce69bafecb47"
 } ]

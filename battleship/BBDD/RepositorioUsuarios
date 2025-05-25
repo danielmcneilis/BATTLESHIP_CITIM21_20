@@ -1,9 +1,28 @@
 {
   "@class" : "java.util.HashMap",
+  "ff56c2f78d087919fd86cddafd373b35" : {
+    "@class" : "es.upm.etsisi.CITIM21_20.models.User",
+    "username" : "Carlos",
+    "id" : "ff56c2f78d087919fd86cddafd373b35",
+    "validUserName" : true,
+    "puntuaciones" : [ "java.util.ArrayList", [ ] ],
+    "movimientos" : [ "java.util.ArrayList", [ ] ],
+    "admin" : true
+  },
   "eae8b4abebb09a0b614642b890a02518" : {
     "@class" : "es.upm.etsisi.CITIM21_20.models.User",
     "username" : "daniel",
     "id" : "eae8b4abebb09a0b614642b890a02518",
+    "validUserName" : true,
+    "puntuaciones" : [ "java.util.ArrayList", [ {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Score",
+      "partidaAsociada" : 81050774943800,
+      "puntos" : 9
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Score",
+      "partidaAsociada" : 82934177800500,
+      "puntos" : 37
+    } ] ],
     "movimientos" : [ "java.util.ArrayList", [ {
       "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
     }, {
@@ -243,16 +262,155 @@
     }, {
       "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
     } ] ],
+    "admin" : false
+  },
+  "32cd554f670a2386aaecce69bafecb47" : {
+    "@class" : "es.upm.etsisi.CITIM21_20.models.User",
+    "username" : "pepe",
+    "id" : "32cd554f670a2386aaecce69bafecb47",
+    "validUserName" : true,
     "puntuaciones" : [ "java.util.ArrayList", [ {
       "@class" : "es.upm.etsisi.CITIM21_20.models.Score",
-      "partidaAsociada" : 81050774943800,
-      "puntos" : 9
-    }, {
-      "@class" : "es.upm.etsisi.CITIM21_20.models.Score",
-      "partidaAsociada" : 82934177800500,
-      "puntos" : 37
+      "partidaAsociada" : 87438826182000,
+      "puntos" : 4
     } ] ],
-    "validUserName" : true,
+    "movimientos" : [ "java.util.ArrayList", [ {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Movement"
+    } ] ],
     "admin" : false
   }
 }
