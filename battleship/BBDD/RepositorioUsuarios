@@ -4,15 +4,6 @@
     "@class" : "es.upm.etsisi.CITIM21_20.models.User",
     "username" : "daniel",
     "id" : "b49184cc62126b80eae556f02381a208",
-    "puntuaciones" : [ "java.util.ArrayList", [ {
-      "@class" : "es.upm.etsisi.CITIM21_20.models.Score",
-      "partidaAsociada" : 102461741836000,
-      "puntos" : 34
-    }, {
-      "@class" : "es.upm.etsisi.CITIM21_20.models.Score",
-      "partidaAsociada" : 102597826163900,
-      "puntos" : 37
-    } ] ],
     "movimientos" : [ "java.util.ArrayList", [ {
       "@class" : "es.upm.etsisi.CITIM21_20.models.Movement",
       "fila" : 3,
@@ -671,6 +662,15 @@
       "id" : 102597826163900,
       "time" : 1748188318199,
       "impact" : false
+    } ] ],
+    "puntuaciones" : [ "java.util.ArrayList", [ {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Score",
+      "partidaAsociada" : 102461741836000,
+      "puntos" : 34
+    }, {
+      "@class" : "es.upm.etsisi.CITIM21_20.models.Score",
+      "partidaAsociada" : 102597826163900,
+      "puntos" : 37
     } ] ],
     "validUserName" : true,
     "admin" : false

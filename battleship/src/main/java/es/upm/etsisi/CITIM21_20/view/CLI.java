@@ -39,17 +39,20 @@ public class CLI {
         this.userService = new UserService(userRepository, sessionRepository);
         this.scoreService = new ScoreService(userRepository);
         this.excute();
+
         /*
-        User carlos = new User("Carlos", Cifrado.cifrar("carlos@upm.es"));
-        userRepository.createUser("Carlos", Cifrado.cifrar("carlos@upm.es"));
+        User carlos = new User("Carlos", Cifrado.cifrar("carlos.badenes@upm.es"));
+        userRepository.createUser("Carlos", Cifrado.cifrar("carlos.badenes@upm.es"));
         userRepository.getUserByUsername("Carlos").setAdmin(true);
-        sessionRepository.createSession(carlos, Cifrado.cifrar("carlos@upm.es"));
-        sessionRepository.getSession(Cifrado.cifrar("carlos@upm.es")).logout();
+        sessionRepository.createSession(carlos, Cifrado.cifrar("carlos.badenes@upm.es"));
+        sessionRepository.getSession(Cifrado.cifrar("carlos.badenes@upm.es")).logout();
         sessionRepository.saveSesions();
         userRepository.saveUsers();
         userRepository.loadUsers();
 
          */
+
+
     }
 
     public static void main(String[] args) throws IOException {

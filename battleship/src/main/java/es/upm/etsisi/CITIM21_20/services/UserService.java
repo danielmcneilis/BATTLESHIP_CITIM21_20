@@ -78,6 +78,8 @@ public class UserService implements  IUserService{
                 throw new RuntimeException("LOGOUT FAILED");
             }
         }
+        userSession.logout();
+        sessionList.saveSesions();
     }
 
     @Override
@@ -89,6 +91,7 @@ public class UserService implements  IUserService{
         } else {
             throw new RuntimeException("ERROR LOGIN LDAP");
         }
+        sessionList.saveSesions();
     }
 
     @Override

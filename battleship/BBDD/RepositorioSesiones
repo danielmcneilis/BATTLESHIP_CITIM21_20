@@ -2,11 +2,11 @@
   "user" : {
     "username" : "daniel",
     "id" : "b49184cc62126b80eae556f02381a208",
-    "puntuaciones" : [ ],
     "movimientos" : [ ],
+    "puntuaciones" : [ ],
     "validUserName" : true,
     "admin" : false
   },
-  "active" : true,
+  "active" : false,
   "id" : "b49184cc62126b80eae556f02381a208"
 } ]
