@@ -1,34 +1,12 @@
 [ {
   "user" : {
     "username" : "daniel",
-    "id" : "eae8b4abebb09a0b614642b890a02518",
-    "validUserName" : true,
+    "id" : "b49184cc62126b80eae556f02381a208",
     "puntuaciones" : [ ],
     "movimientos" : [ ],
-    "admin" : false
-  },
-  "active" : false,
-  "id" : "eae8b4abebb09a0b614642b890a02518"
-}, {
-  "user" : {
-    "username" : "Carlos",
-    "id" : "ff56c2f78d087919fd86cddafd373b35",
     "validUserName" : true,
-    "puntuaciones" : [ ],
-    "movimientos" : [ ],
-    "admin" : false
-  },
-  "active" : false,
-  "id" : "ff56c2f78d087919fd86cddafd373b35"
-}, {
-  "user" : {
-    "username" : "pepe",
-    "id" : "32cd554f670a2386aaecce69bafecb47",
-    "validUserName" : true,
-    "puntuaciones" : [ ],
-    "movimientos" : [ ],
     "admin" : false
   },
   "active" : true,
-  "id" : "32cd554f670a2386aaecce69bafecb47"
+  "id" : "b49184cc62126b80eae556f02381a208"
 } ]
