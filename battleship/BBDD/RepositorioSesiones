@@ -2,11 +2,33 @@
   "user" : {
     "username" : "daniel",
     "id" : "b49184cc62126b80eae556f02381a208",
-    "movimientos" : [ ],
     "puntuaciones" : [ ],
     "validUserName" : true,
+    "movimientos" : [ ],
     "admin" : false
   },
   "active" : false,
   "id" : "b49184cc62126b80eae556f02381a208"
+}, {
+  "user" : {
+    "username" : "carlos",
+    "id" : "256ce0e10a3523aca5a97d93a446f8a0",
+    "puntuaciones" : [ ],
+    "validUserName" : true,
+    "movimientos" : [ ],
+    "admin" : false
+  },
+  "active" : false,
+  "id" : "256ce0e10a3523aca5a97d93a446f8a0"
+}, {
+  "user" : {
+    "username" : "andrea",
+    "id" : "fdc82c0028ee52c0e0f3f790bb547d37",
+    "puntuaciones" : [ ],
+    "validUserName" : true,
+    "movimientos" : [ ],
+    "admin" : false
+  },
+  "active" : false,
+  "id" : "fdc82c0028ee52c0e0f3f790bb547d37"
 } ]

@@ -8,6 +8,7 @@ import es.upm.etsisi.CITIM21_20.repositories.UserRepository;
 import es.upm.etsisi.CITIM21_20.services.*;
 import es.upm.etsisi.fis.model.IPuntuacion;
 import servidor.ExternalLDAP;
+import utilidades.Cifrado;
 
 import java.io.IOException;
 import java.util.List;
@@ -37,20 +38,6 @@ public class CLI {
         this.userService = new UserService(userRepository, sessionRepository);
         this.scoreService = new ScoreService(userRepository);
         this.excute();
-
-        /*
-        User carlos = new User("Carlos", Cifrado.cifrar("carlos.badenes@upm.es"));
-        userRepository.createUser("Carlos", Cifrado.cifrar("carlos.badenes@upm.es"));
-        userRepository.getUserByUsername("Carlos").setAdmin(true);
-        sessionRepository.createSession(carlos, Cifrado.cifrar("carlos.badenes@upm.es"));
-        sessionRepository.getSession(Cifrado.cifrar("carlos.badenes@upm.es")).logout();
-        sessionRepository.saveSesions();
-        userRepository.saveUsers();
-        userRepository.loadUsers();
-
-         */
-
-
     }
 
     public static void main(String[] args) throws IOException {
