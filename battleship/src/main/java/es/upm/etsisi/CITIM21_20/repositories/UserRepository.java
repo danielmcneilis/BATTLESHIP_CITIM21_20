@@ -60,7 +60,7 @@ public class UserRepository implements IUserRepository {
     public User getUserByUsername(String username) {
         for (Map.Entry<String, User> entry : userList.entrySet()) {
             User user = entry.getValue();
-            if (user.getUsername().equals(username)) {
+            if (user.getNombre().equals(username)) {
                 return user;
             }
         }

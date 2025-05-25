@@ -23,7 +23,7 @@ public class ScoreService implements IScoreService{
             listapuntuaciones = adminScore();
 
         } else {
-            listapuntuaciones = userScore(usuario.getUsername());
+            listapuntuaciones = userScore(usuario.getNombre());
 
         }
         return listapuntuaciones;

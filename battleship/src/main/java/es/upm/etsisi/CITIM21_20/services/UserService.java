@@ -111,6 +111,6 @@ public class UserService implements  IUserService{
     }
 
     private boolean isSure(User user, String actualUsername) {
-        return  user.getUsername().equals(actualUsername);
+        return  user.getNombre().equals(actualUsername);
     }
 }

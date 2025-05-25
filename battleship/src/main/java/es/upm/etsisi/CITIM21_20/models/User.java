@@ -21,7 +21,6 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 public class User implements IJugador {
 
-    @Getter
     @Setter
     private String username;
     @Getter
@@ -115,7 +114,7 @@ public class User implements IJugador {
     }
 
     @Override
-    @JsonIgnore
+    @JsonProperty("username")
     public String getNombre() {
         return this.username;
     }
