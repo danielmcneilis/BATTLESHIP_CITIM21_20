@@ -1,6 +1,5 @@
 package es.upm.etsisi.CITIM21_20.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import es.upm.etsisi.fis.model.IJugador;

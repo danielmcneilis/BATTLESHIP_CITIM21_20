@@ -113,7 +113,6 @@ public class CLI {
 
     private void menuPrincipal(User userLoggeado) throws IOException {
         int option;
-        String id;
         Scanner scanner = new Scanner(System.in);
         do {
             mostrarMenuPrincipal();
