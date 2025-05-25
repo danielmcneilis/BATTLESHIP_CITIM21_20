@@ -10,4 +10,6 @@ public interface ISessonRepository {
     void createSession(User user, String id);
 
     boolean deleteSession(String id);
+
+    void saveSesions();
 }

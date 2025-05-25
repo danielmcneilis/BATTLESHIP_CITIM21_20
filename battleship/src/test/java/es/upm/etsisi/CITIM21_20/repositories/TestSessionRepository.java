@@ -47,6 +47,11 @@ public class TestSessionRepository implements ISessonRepository{
         return false;
     }
 
+    @Override
+    public void saveSesions() {
+
+    }
+
     public void reset(){
         sessions.clear();
     }

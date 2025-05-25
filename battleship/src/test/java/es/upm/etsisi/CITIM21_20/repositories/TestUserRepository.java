@@ -31,7 +31,7 @@ public class TestUserRepository implements IUserRepository{
     public User getUserByUsername(String username) {
         for (Map.Entry<String, User> entry : userList.entrySet()) {
             User user = entry.getValue();
-            if (user.getUsername().equals(username)) {
+            if (user.getNombre().equals(username)) {
                 return user;
             }
         }
@@ -60,6 +60,16 @@ public class TestUserRepository implements IUserRepository{
             lista.add(user);
         }
         return lista;
+    }
+
+    @Override
+    public void saveUsers() {
+
+    }
+
+    @Override
+    public void loadUsers() {
+
     }
 
     public void reset(){

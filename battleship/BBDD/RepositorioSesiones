@@ -1,0 +1,12 @@
+[ {
+  "user" : {
+    "username" : "daniel",
+    "id" : "b49184cc62126b80eae556f02381a208",
+    "movimientos" : [ ],
+    "puntuaciones" : [ ],
+    "validUserName" : true,
+    "admin" : false
+  },
+  "active" : false,
+  "id" : "b49184cc62126b80eae556f02381a208"
+} ]

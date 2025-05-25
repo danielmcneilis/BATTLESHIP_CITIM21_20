@@ -35,11 +35,24 @@ public class CLI {
     private CLI() throws IOException {
         this.userRepository = UserRepository.getInstance();
         this.sessionRepository = SessionRepository.getInstance();
-        userRepository.createUser("kike", Cifrado.cifrar("pdi@upm.es"));
         this.gameService = new GameService(new Scanner(System.in));
         this.userService = new UserService(userRepository, sessionRepository);
         this.scoreService = new ScoreService(userRepository);
         this.excute();
+
+        /*
+        User carlos = new User("Carlos", Cifrado.cifrar("carlos.badenes@upm.es"));
+        userRepository.createUser("Carlos", Cifrado.cifrar("carlos.badenes@upm.es"));
+        userRepository.getUserByUsername("Carlos").setAdmin(true);
+        sessionRepository.createSession(carlos, Cifrado.cifrar("carlos.badenes@upm.es"));
+        sessionRepository.getSession(Cifrado.cifrar("carlos.badenes@upm.es")).logout();
+        sessionRepository.saveSesions();
+        userRepository.saveUsers();
+        userRepository.loadUsers();
+
+         */
+
+
     }
 
     public static void main(String[] args) throws IOException {
@@ -74,7 +87,7 @@ public class CLI {
             mostrarMenuLogin();
             option = scanner.nextInt();
         } while (option < 1 || option > 3);
-
+        scanner.nextLine(); // limpieza de buffer
         switch (option) {
             case 1:
                 id = ExternalLDAP.LoginLDAP();
@@ -84,7 +97,6 @@ public class CLI {
             case 2:
                 id = ExternalLDAP.LoginLDAP();
                 System.out.println("Introduce un nombre de usuario");
-                scanner.nextLine();
                 String username = scanner.nextLine();
                 userLoggeado = this.userService.userRegister(id, username);
 
@@ -101,46 +113,49 @@ public class CLI {
 
     private void menuPrincipal(User userLoggeado) throws IOException {
         int option;
-        String id;
         Scanner scanner = new Scanner(System.in);
         do {
             mostrarMenuPrincipal();
             option = scanner.nextInt();
         } while (option < 1 || option > 5);
-
+        scanner.nextLine(); // limpieza de buffer
         switch (option) {
             case 1:
                 // empezar partida
                 this.gameService.startGame(userLoggeado);
                 menuPrincipal(userLoggeado);
+                userRepository.saveUsers();
                 break;
             case 2:
                 //mostrar puntuacion
                 List<IPuntuacion> puntuaciones = this.scoreService.getScore(userLoggeado);
                 mostrarPuntuaciones(puntuaciones);
                 menuPrincipal(userLoggeado);
+                userRepository.saveUsers();
                 break;
             case 3:
                 // TODO Cambiar Nombre Usuario
+
+                String actualUsername;
                 System.out.println("Introduce tu nombre actual: ");
-                scanner.nextLine();
-                String actualUsername = scanner.nextLine();
+                actualUsername = scanner.nextLine();
                 System.out.println("Introduce tu nombre nuevo: ");
                 String newUsername = scanner.nextLine();
                 userService.changeUserName(userLoggeado, actualUsername, newUsername);
                 menuPrincipal(userLoggeado);
+                userRepository.saveUsers();
                 break;
             case 4:
                 // cerrar sesion
                 userService.logout(userLoggeado.getId());
                 System.out.println("LOGOUT SUCCESSFUL");
-                menuLogin();
+                userRepository.saveUsers();
                 break;
             case 5:
                 userService.logout(userLoggeado.getId());
                 userService.deleteAccount(userLoggeado.getId());
                 System.out.println("Usuario borrado");
-                menuLogin();
+                userRepository.saveUsers();
                 break;
             default:
                 System.out.println("ERROR");

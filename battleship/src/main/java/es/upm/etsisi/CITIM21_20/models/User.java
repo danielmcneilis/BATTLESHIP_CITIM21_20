@@ -1,5 +1,7 @@
 package es.upm.etsisi.CITIM21_20.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
 import es.upm.etsisi.fis.model.IJugador;
 import es.upm.etsisi.fis.model.IMovimiento;
 import es.upm.etsisi.fis.model.IPuntuacion;
@@ -13,10 +15,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
 
 public class User implements IJugador {
 
-    @Getter
     @Setter
     private String username;
     @Getter
@@ -24,9 +27,33 @@ public class User implements IJugador {
     @Getter
     @Setter
     private boolean isAdmin;
+    @JsonProperty("puntuaciones")
+    @JsonTypeInfo(
+            use = JsonTypeInfo.Id.CLASS,
+            include = JsonTypeInfo.As.PROPERTY,
+            property = "@class"
+    )
+    @JsonSubTypes({
+            @JsonSubTypes.Type(value = Score.class, name = "es.upm.etsisi.CITIM21_20.models.Score")
+    })
+    @Setter
     private List<IPuntuacion> score;
+    @JsonProperty("movimientos")
+    @JsonTypeInfo(
+            use = JsonTypeInfo.Id.CLASS,
+            include = JsonTypeInfo.As.PROPERTY,
+            property = "@class"
+    )
+    @JsonSubTypes({
+            @JsonSubTypes.Type(value = Movement.class, name = "es.upm.etsisi.CITIM21_20.models.Movement")
+    })
+    @Setter
     private List<IMovimiento> attackList;
 
+    public User (){
+        this.score = new ArrayList<IPuntuacion>();
+        this.attackList = new ArrayList<IMovimiento>();
+    }
 
     public User(String username, String id) throws IOException {
         this.username = username;
@@ -72,10 +99,10 @@ public class User implements IJugador {
         do {
             fila = scanner.nextInt();
             columna = scanner.nextInt();
-            if (fila < 0 || fila > 9 || columna < 0 || columna > 9) {
+            if (fila < 0 || fila > chars.length || columna < 0 || columna > chars[0].length) {
                 System.out.println("INVALID POSITION");
             }
-        } while (fila < 0 || fila > 9 || columna < 0 || columna > 9);
+        } while (fila < 0 || fila > chars.length || columna < 0 || columna > chars[0].length);
         int[] posicion = {fila, columna};
         return posicion;
     }
@@ -86,6 +113,7 @@ public class User implements IJugador {
     }
 
     @Override
+    @JsonProperty("username")
     public String getNombre() {
         return this.username;
     }

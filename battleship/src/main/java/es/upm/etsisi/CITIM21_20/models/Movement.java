@@ -1,13 +1,23 @@
 package es.upm.etsisi.CITIM21_20.models;
 
 import es.upm.etsisi.fis.model.IMovimiento;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import lombok.Getter;
+import lombok.Setter;
+
+@JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "@class")
 
 public class Movement implements IMovimiento {
 
+    @Getter
     private int fila;
+    @Getter
     private int columna;
+    @Getter
     private Long id;
+    @Getter
     private long time;
+    @Getter
     private boolean impact;
 
     public Movement() {

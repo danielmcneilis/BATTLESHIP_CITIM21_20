@@ -78,6 +78,8 @@ public class UserService implements  IUserService{
                 throw new RuntimeException("LOGOUT FAILED");
             }
         }
+        userSession.logout();
+        sessionList.saveSesions();
     }
 
     @Override
@@ -89,6 +91,7 @@ public class UserService implements  IUserService{
         } else {
             throw new RuntimeException("ERROR LOGIN LDAP");
         }
+        sessionList.saveSesions();
     }
 
     @Override
@@ -107,9 +110,10 @@ public class UserService implements  IUserService{
             user.setUsername(actualUsername);
             throw new RuntimeException("INVALID USERNAME");
         }
+        userList.saveUsers();
     }
 
     private boolean isSure(User user, String actualUsername) {
-        return  user.getUsername().equals(actualUsername);
+        return  user.getNombre().equals(actualUsername);
     }
 }
