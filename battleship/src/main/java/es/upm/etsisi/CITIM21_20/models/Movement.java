@@ -1,9 +1,8 @@
 package es.upm.etsisi.CITIM21_20.models;
 
-import es.upm.etsisi.fis.model.IMovimiento;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import es.upm.etsisi.fis.model.IMovimiento;
 import lombok.Getter;
-import lombok.Setter;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "@class")
 

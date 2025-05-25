@@ -7,16 +7,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class TestUserRepository implements IUserRepository{
+public class TestUserRepository implements IUserRepository {
     private static TestUserRepository instance;
     private HashMap<String, User> userList;
 
-    private TestUserRepository(){
+    private TestUserRepository() {
         this.userList = new HashMap<>();
     }
 
-    public static TestUserRepository getInstance(){
-        if(instance == null){
+    public static TestUserRepository getInstance() {
+        if (instance == null) {
             instance = new TestUserRepository();
         }
         return instance;
@@ -72,7 +72,7 @@ public class TestUserRepository implements IUserRepository{
 
     }
 
-    public void reset(){
+    public void reset() {
         userList.clear();
     }
 }

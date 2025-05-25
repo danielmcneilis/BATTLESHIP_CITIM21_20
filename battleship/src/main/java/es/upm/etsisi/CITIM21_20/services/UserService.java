@@ -4,18 +4,11 @@ import es.upm.etsisi.CITIM21_20.models.Session;
 import es.upm.etsisi.CITIM21_20.models.User;
 import es.upm.etsisi.CITIM21_20.repositories.ISessonRepository;
 import es.upm.etsisi.CITIM21_20.repositories.IUserRepository;
-import es.upm.etsisi.fis.model.IPuntuacion;
 import servidor.ExternalLDAP;
 
 import java.io.IOException;
-import java.rmi.RemoteException;
-import java.rmi.server.ExportException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Scanner;
 
-public class UserService implements  IUserService{
+public class UserService implements IUserService {
 
     private IUserRepository userList;
     private ISessonRepository sessionList;
@@ -42,7 +35,7 @@ public class UserService implements  IUserService{
         }
 
         createdUser = userList.createUser(username, id);
-        if(createdUser == null){
+        if (createdUser == null) {
             throw new RuntimeException("USER NOT VALID");
         }
 
@@ -72,8 +65,7 @@ public class UserService implements  IUserService{
         Session userSession = this.sessionList.getSession(id);
         if (userSession == null) {
             throw new RuntimeException("USER NOT FOUND");
-        }
-        else {
+        } else {
             if (!userSession.logout()) {
                 throw new RuntimeException("LOGOUT FAILED");
             }
@@ -95,9 +87,9 @@ public class UserService implements  IUserService{
     }
 
     @Override
-    public void changeUserName(User user,String actualUsername, String newUsername) throws IOException {
+    public void changeUserName(User user, String actualUsername, String newUsername) throws IOException {
 
-        if(!isSure(user, actualUsername)) {
+        if (!isSure(user, actualUsername)) {
             throw new RuntimeException("IS NOT YOUR ACTUAL USERNAME");
         }
 
@@ -106,7 +98,7 @@ public class UserService implements  IUserService{
         }
 
         user.setUsername(newUsername);
-        if(!user.isValidUserName()){
+        if (!user.isValidUserName()) {
             user.setUsername(actualUsername);
             throw new RuntimeException("INVALID USERNAME");
         }
@@ -114,6 +106,6 @@ public class UserService implements  IUserService{
     }
 
     private boolean isSure(User user, String actualUsername) {
-        return  user.getNombre().equals(actualUsername);
+        return user.getNombre().equals(actualUsername);
     }
 }

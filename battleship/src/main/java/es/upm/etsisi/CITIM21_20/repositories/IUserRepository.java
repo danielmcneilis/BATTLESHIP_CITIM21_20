@@ -8,20 +8,19 @@ import java.util.ArrayList;
 public interface IUserRepository {
 
 
+    User getUser(String id);
 
-        User getUser(String id);
+    User createUser(String username, String id) throws IOException;
 
-        User createUser(String username, String id) throws IOException ;
+    User getUserByUsername(String username);
 
-        User getUserByUsername(String username);
+    void deleteUser(String id);
 
-        void deleteUser(String id);
+    ArrayList<User> valores();
 
-        ArrayList<User> valores();
+    void saveUsers();
 
-        void saveUsers();
-
-        void loadUsers ();
+    void loadUsers();
 
 }
 

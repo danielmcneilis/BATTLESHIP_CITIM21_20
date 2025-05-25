@@ -9,10 +9,9 @@ import es.upm.etsisi.fis.model.IJugador;
 import es.upm.etsisi.fis.model.IMovimiento;
 import es.upm.etsisi.fis.model.IPuntuacion;
 
-import java.util.List;
 import java.util.Scanner;
 
-public class GameService implements IGameService{
+public class GameService implements IGameService {
 
     private ControladorPartida controladorPartida;
     private IUserRepository userList;
@@ -26,7 +25,6 @@ public class GameService implements IGameService{
     public void startGame(IJugador usuariologued) {
         IPuntuacion puntuacion = new Score();
         IMovimiento movimiento = new Movement();
-
 
 
         controladorPartida.crearPartida(usuariologued, puntuacion, movimiento);

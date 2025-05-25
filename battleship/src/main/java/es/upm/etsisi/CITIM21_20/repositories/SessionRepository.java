@@ -9,7 +9,6 @@ import es.upm.etsisi.CITIM21_20.models.User;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class SessionRepository implements ISessonRepository {
@@ -62,35 +61,37 @@ public class SessionRepository implements ISessonRepository {
         return false;
     }
 
-    private void inicializarFichero (){
+    private void inicializarFichero() {
         try {
             File file = new File(rute);
-            if(!file.exists()){
+            if (!file.exists()) {
                 File carpeta = file.getParentFile();
-                if(carpeta != null && !carpeta.exists()){
+                if (carpeta != null && !carpeta.exists()) {
                     carpeta.mkdirs();
                 }
                 mapper.writeValue(file, new ArrayList<Session>());
             }
-        }catch (IOException e){
-            throw new RuntimeException ("CANT CREATE FILE", e);
+        } catch (IOException e) {
+            throw new RuntimeException("CANT CREATE FILE", e);
         }
     }
 
-    public void saveSesions(){
-        try{
+    public void saveSesions() {
+        try {
             mapper.writerWithDefaultPrettyPrinter().writeValue(new File(rute), this.sessions);
 
-        }catch (IOException e){
+        } catch (IOException e) {
             throw new RuntimeException("CANT SAVE ON FILE");
         }
     }
-    private void loadSesions(){
-        try{
+
+    private void loadSesions() {
+        try {
             File file = new File(rute);
-            TypeReference<ArrayList<Session>> typeref = new TypeReference<ArrayList<Session>>() {};
+            TypeReference<ArrayList<Session>> typeref = new TypeReference<ArrayList<Session>>() {
+            };
             this.sessions = mapper.readValue(file, typeref);
-        }catch (IOException e){
+        } catch (IOException e) {
             throw new RuntimeException("CANT READ FILE", e);
         }
     }

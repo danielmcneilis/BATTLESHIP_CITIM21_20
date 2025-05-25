@@ -1,6 +1,5 @@
 package es.upm.etsisi.CITIM21_20.view;
 
-import es.upm.etsisi.CITIM21_20.models.Score;
 import es.upm.etsisi.CITIM21_20.models.User;
 import es.upm.etsisi.CITIM21_20.repositories.ISessonRepository;
 import es.upm.etsisi.CITIM21_20.repositories.IUserRepository;
@@ -9,7 +8,6 @@ import es.upm.etsisi.CITIM21_20.repositories.UserRepository;
 import es.upm.etsisi.CITIM21_20.services.*;
 import es.upm.etsisi.fis.model.IPuntuacion;
 import servidor.ExternalLDAP;
-import utilidades.Cifrado;
 
 import java.io.IOException;
 import java.util.List;

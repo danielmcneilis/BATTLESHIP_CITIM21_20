@@ -15,9 +15,10 @@ public class Session {
     private LocalDateTime lastLogin;
 
 
-    public Session (){
+    public Session() {
         this.lastLogin = LocalDateTime.now();
     }
+
     public Session(User user, String id) {
         this.user = user;
         this.id = id;

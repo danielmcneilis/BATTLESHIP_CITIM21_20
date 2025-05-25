@@ -1,6 +1,5 @@
 package es.upm.etsisi.CITIM21_20.services;
 
-import es.upm.etsisi.CITIM21_20.models.Score;
 import es.upm.etsisi.CITIM21_20.models.User;
 import es.upm.etsisi.CITIM21_20.repositories.IUserRepository;
 import es.upm.etsisi.fis.model.IPuntuacion;
@@ -9,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class ScoreService implements IScoreService{
+public class ScoreService implements IScoreService {
     private IUserRepository userList;
 
     public ScoreService(IUserRepository userList) {
