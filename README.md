@@ -30,10 +30,58 @@ El proyecto consiste en una versión digital de Battleship donde los jugadores s
 ## 📂 Estructura del Repositorio
 
 El proyecto en GitLab sigue la estructura exigida para la entrega de la práctica:
-
-*   `/modelado`: Contiene los diagramas UML (Casos de uso, Clases, Componentes y Despliegue) en formato PNG/JPG, junto con el documento PDF de recopilación de la fase de análisis y diseño[cite: 6, 10, 11].
-*   `/construcción`: Contiene el código fuente de la aplicación en Java y la carpeta de test con las pruebas unitarias[cite: 11].
-*   `/pruebas`: Contiene los documentos PDF de verificación y validación, incluyendo la solución teórica de casos de prueba y las pruebas de aceptación y trazabilidad[cite: 10, 11].
+```
+📁 BATTLESHIP_CITIM21_20/
+├── 📁 Modelado/                                     # Contiene los diagramas UML, junto con el documento PDF de recopilación de la fase de análisis y diseño  
+      └── 📁 Diagrama de casos de uso/
+      └── 📁 Diagrama de clases de diseño/                                    
+      └── 📁 Diagrama de clases/                                
+      └── 📁 Diagrama de componentes/  
+      └── 📁 Diagrama de despliegue/   
+├── 📁 battleship/                                    # Contiene el código fuente de la aplicación en Java y la carpeta de test con las pruebas unitarias
+      └── 📁 BBDD/                                    # Presistencia
+            └── RepositorioSesiones
+            └── RepositorioUsuarios
+      └── 📁 libs/etsisi/
+            └── 📁 Battleship/1.11/
+                  └── Battleship-1.11.jar
+            └── 📁 externals/5.1/
+                  └── externals-5.1.jar
+      ├── 📁 src/                                             # Directorio raíz del proyecto
+            └── 📁 main/java/es/upm/etsisi/CITIM21_20/           # Código fuente principal de la aplicación en Java
+                  └── 📁 models/                                 # Modelos de datos del dominio
+                        └── DateTimeFormatter.java
+                        └── Movement.java
+                        └── Score.java
+                        └── Session.java
+                        └── User.java
+                  └── 📁 repositories/                           # Interfaces y clases para persistencia de datos
+                        └── ISessonRepository.java
+                        └── IUserRepository.java
+                        └── SessionRepository.java
+                        └── UserRepository.java
+                  └── 📁 services/                               # Lógica de negocio e interfaces de servicios
+                        └── GameService.java
+                        └── IGameService.java
+                        └── IScoreService.java
+                        └── IUserService.java
+                        └── ScoreService.java
+                        └── UserService.java
+                  └── 📁 view/                                         # Componentes de la vista o interfaz
+                        └── black_list.txt                             # Archivo de texto plano (lista negra)
+               └── 📁 test/java/es/upm/etsisi/CITIM21_20/                # Carpeta de test con las pruebas unitarias (JUnit)
+                     └── 📁 repositories/                              # Pruebas unitarias de los repositorios
+                           └── TestSessionRepository.java
+                           └── TestUserRepository.java
+                     └── 📁 services/                                     # Pruebas unitarias de los servicios
+                           └── UserServiceTest.java
+                     └── AppTest.java                                     # Pruebas principales de la aplicación
+            
+      
+└── Main.svg                                           # Programa
+└── Pruebas.pdf
+└── README.md
+```
 
 ## 📋 Normativa
 
